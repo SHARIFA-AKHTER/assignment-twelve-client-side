@@ -1,4 +1,4 @@
-
+import tesla1 from '../../assets/image/Tesla_logo.png'
 import React, { useState } from "react";
 
 const Navbar = ({ user, role, onLogout }) => {
@@ -15,7 +15,7 @@ const Navbar = ({ user, role, onLogout }) => {
         {/* Logo Section */}
         <div className="flex items-center">
           <img
-            src="/path/to/logo.png"
+            src={tesla1}
             alt="Tesla AMS Logo"
             className="h-8 w-8 mr-2"
           />
