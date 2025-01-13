@@ -11,7 +11,8 @@ const Navbar = ({ user, role, onLogout }) => {
   return (
     <nav className="bg-gray-800 text-white">
       {/* Navbar Container */}
-      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4
+       py-3 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
           <img
