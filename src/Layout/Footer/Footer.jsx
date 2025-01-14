@@ -1,4 +1,4 @@
-import tesla1 from '../../assets/image/Tesla_logo.png'
+import logo1 from '../../assets/image/logo-1.png'
 const Footer = () => {
   return (
     <footer className="bg-gray-800 text-gray-200 py-10">
@@ -6,7 +6,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Logo & About */}
           <div>
-            <img src={tesla1}alt="AI Project Logo" className="h-12 mb-4" />
+            <img src={logo1}alt="AI Project Logo" className="h-12 mb-4" />
             <p className="text-gray-400 text-sm">
               Empowering innovation with cutting-edge AI solutions. 
               We bring intelligence to every aspect of your work.

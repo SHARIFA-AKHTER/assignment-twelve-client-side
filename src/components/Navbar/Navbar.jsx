@@ -1,26 +1,35 @@
-import tesla1 from '../../assets/image/Tesla_logo.png'
-import React, { useState } from "react";
 
-const Navbar = ({ user, role, onLogout }) => {
+import React, { useContext, useState } from "react";
+import { AuthContext } from "../../Providers/AuthProvider"; 
+import logo1 from "../../assets/image/logo-1.png";
+
+const Navbar = () => {
+  const { user, logOut } = useContext(AuthContext); 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Toggle mobile menu
   const handleToggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  // Logout function
+  const handleLogout = async () => {
+    try {
+      await logOut(); 
+      console.log("User logged out successfully");
+    } catch (error) {
+      console.error("Error logging out:", error.message);
+    }
   };
 
   return (
     <nav className="bg-gray-800 text-white">
       {/* Navbar Container */}
-      <div className="container mx-auto px-4
-       py-3 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex items-center">
-          <img
-            src={tesla1}
-            alt="Tesla AMS Logo"
-            className="h-8 w-8 mr-2"
-          />
-          <span className="text-xl font-bold">Tesla AMS</span>
+          <img src={logo1} alt="Logo" className="h-8 w-8 mr-2" />
+          <span className="text-xl font-bold">ManageMate</span>
         </div>
 
         {/* Desktop Navigation Links */}
@@ -28,10 +37,16 @@ const Navbar = ({ user, role, onLogout }) => {
           <a href="/" className="hover:text-blue-400 transition duration-200">
             Home
           </a>
-          <a href="/about" className="hover:text-blue-400 transition duration-200">
+          <a
+            href="/about"
+            className="hover:text-blue-400 transition duration-200"
+          >
             About
           </a>
-          <a href="/packages" className="hover:text-blue-400 transition duration-200">
+          <a
+            href="/packages"
+            className="hover:text-blue-400 transition duration-200"
+          >
             Packages
           </a>
         </div>
@@ -40,14 +55,16 @@ const Navbar = ({ user, role, onLogout }) => {
         <div className="hidden md:flex items-center space-x-4">
           {user ? (
             <div className="flex items-center space-x-2">
+              {/* User Info */}
               <img
                 src={user.photoURL || "/path/to/default-avatar.png"}
                 alt="User"
                 className="h-8 w-8 rounded-full"
               />
-              <span className="font-medium">{user.name || "User"}</span>
+              <span className="font-medium">{user.displayName || "User"}</span>
+              {/* Logout Button */}
               <button
-                onClick={onLogout}
+                onClick={handleLogout}
                 className="bg-red-600 px-3 py-1 rounded hover:bg-red-500 transition duration-200"
               >
                 Logout
@@ -55,6 +72,7 @@ const Navbar = ({ user, role, onLogout }) => {
             </div>
           ) : (
             <>
+              {/* Authentication Links */}
               <a
                 href="/login"
                 className="hover:text-blue-400 transition duration-200"
@@ -105,10 +123,16 @@ const Navbar = ({ user, role, onLogout }) => {
           <a href="/" className="block hover:text-blue-400 transition duration-200">
             Home
           </a>
-          <a href="/about" className="block hover:text-blue-400 transition duration-200">
+          <a
+            href="/about"
+            className="block hover:text-blue-400 transition duration-200"
+          >
             About
           </a>
-          <a href="/packages" className="block hover:text-blue-400 transition duration-200">
+          <a
+            href="/packages"
+            className="block hover:text-blue-400 transition duration-200"
+          >
             Packages
           </a>
           {!user ? (
@@ -134,7 +158,7 @@ const Navbar = ({ user, role, onLogout }) => {
             </>
           ) : (
             <button
-              onClick={onLogout}
+              onClick={handleLogout}
               className="block bg-red-600 px-3 py-1 rounded hover:bg-red-500 transition duration-200"
             >
               Logout

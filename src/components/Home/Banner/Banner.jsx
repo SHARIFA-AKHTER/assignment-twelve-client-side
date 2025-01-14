@@ -10,16 +10,16 @@ const Banner = () => {
         {/* Slider 1: HR Manager */}
         <div id="item1" className="carousel-item w-full relative">
           <img
-            src="https://i.ibb.co.com/C66ycpv/Hr-manager1.jpg"
+            src="https://i.ibb.co.com/QKc7cbq/Hr-manager.webp"
             className="w-full"
             alt="HR Manager"
           />
           <div className="absolute inset-0 flex items-center justify-center text-white">
             <div className="text-center px-4 sm:px-8 md:px-16">
-              <h5 className="text-3xl sm:text-4xl font-bold">
+              <h5 className="text-3xl text-red-600  sm:text-4xl font-bold">
                 Join as HR Manager
               </h5>
-              <p className="text-base sm:text-lg mb-6">
+              <p className="text-red-600 sm:text-lg mb-6">
                 Manage employees and assets
               </p>
               <Link to="/join-hr-manager">
@@ -40,10 +40,10 @@ const Banner = () => {
           />
           <div className="absolute inset-0 flex items-center justify-center text-white">
             <div className="text-center px-4 sm:px-8 md:px-16">
-              <h5 className="text-3xl sm:text-4xl font-bold">
+              <h5 className="text-3xl text-red-600  sm:text-4xl font-bold">
                 Join as an Employee
               </h5>
-              <p className="text-base sm:text-lg mb-6">
+              <p className="text-red-600 sm:text-lg mb-6">
                 Access and request assets
               </p>
               <Link to="/join-employee">

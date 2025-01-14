@@ -2,6 +2,7 @@
 const About = () => {
     return (
       <div className="container mx-auto px-4 py-8">
+        
         {/* About Section */}
         <div className="text-center">
           <h2 className="text-4xl font-bold text-gray-800 mb-4">About Us</h2>
