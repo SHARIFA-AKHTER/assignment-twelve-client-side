@@ -22,7 +22,7 @@ const Banner = () => {
               <p className="text-red-600 sm:text-lg mb-6">
                 Manage employees and assets
               </p>
-              <Link to="/join-hr-manager">
+              <Link to="/join-as-hr-manager">
                 <button className="bg-blue-600 text-white py-2 px-6 rounded hover:bg-blue-500 transition">
                   Join as HR Manager
                 </button>
@@ -46,7 +46,7 @@ const Banner = () => {
               <p className="text-red-600 sm:text-lg mb-6">
                 Access and request assets
               </p>
-              <Link to="/join-employee">
+              <Link to="/join-as-employee">
                 <button className="bg-green-600 text-white py-2 px-6 rounded hover:bg-green-500 transition">
                   Join as Employee
                 </button>

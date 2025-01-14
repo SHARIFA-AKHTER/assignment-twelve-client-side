@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Login = () => {
-  const { signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -15,6 +20,47 @@ const Login = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+
+      Swal.fire({
+        title: "User Login Successful",
+        showClass: {
+          popup: `
+            animate__animated
+            animate__fadeInUp
+            animate__faster
+          `,
+        },
+        hideClass: {
+          popup: `
+            animate__animated
+            animate__fadeOutDown
+            animate__faster
+          `,
+        },
+      });
+      navigate(from, { replace: true });
+    });
+  };
+
+  const handleGoogleLogin = () => {
+    googleSignIn()
+    .then((result) => {
+      const user = result.user;
+      console.log("Google user:", user);
+
+      Swal.fire({
+        title: "Google Login Successful",
+        text: `Welcome, ${user.displayName}!`,
+        icon: "success",
+        showClass: {
+          popup: `animate__animated animate__fadeInUp animate__faster`,
+        },
+        hideClass: {
+          popup: `animate__animated animate__fadeOutDown animate__faster`,
+        },
+      });
+
+      navigate(from, { replace: true });
     });
   };
   return (
@@ -66,9 +112,21 @@ const Login = () => {
                 />
               </div>
             </form>
-            <p>
+            <div className="text-center my-4">
+              <p>Or</p>
+              <button
+                onClick={handleGoogleLogin}
+                className="btn btn-outline w-full"
+              >
+                Continue with Google
+              </button>
+            </div>
+            <p className="text-sm ml-8">
               <small>
-                New Here? <Link to="/signup">Create an account</Link>
+                New here?{" "}
+                <Link to="/signup" className="text-blue-500 hover:underline">
+                  Create an account
+                </Link>
               </small>
             </p>
           </div>

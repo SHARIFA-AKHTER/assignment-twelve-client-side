@@ -49,6 +49,12 @@ const Navbar = () => {
           >
             Packages
           </a>
+          <a
+            href="/secret"
+            className="hover:text-blue-400 transition duration-200"
+          >
+           Secret
+          </a>
         </div>
 
         {/* User/Authentication Section */}
@@ -57,7 +63,7 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               {/* User Info */}
               <img
-                src={user.photoURL || "/path/to/default-avatar.png"}
+                src={user.photoURL || "https://i.ibb.co.com/q07vF3P/Asset-manager.jpg"}
                 alt="User"
                 className="h-8 w-8 rounded-full"
               />
