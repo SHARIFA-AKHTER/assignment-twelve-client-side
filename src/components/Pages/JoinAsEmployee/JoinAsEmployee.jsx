@@ -1,8 +1,10 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
-
+import { AuthContext } from './../../../Providers/AuthProvider';
+// Adjust the path based on your file structure
 
 const JoinAsEmployee = () => {
+  const { googleSignIn } = useContext(AuthContext); 
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -15,25 +17,39 @@ const JoinAsEmployee = () => {
   };
 
   const handleSignup = () => {
-    
     console.log("Form Data Submitted:", formData);
     Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Signed up successfully as an Employee!",
-        showConfirmButton: false,
-        timer: 1500
-      });
+      position: "top-end",
+      icon: "success",
+      title: "Signed up successfully as an Employee!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
   };
 
-  const handleGoogleLogin = () => {
-    Swal.fire({
+  const handleGoogleLogin = async () => {
+    try {
+      const result = await googleSignIn();
+      const user = result.user;
+      console.log("Google User:", user);
+
+      Swal.fire({
         position: "top-end",
         icon: "success",
-        title: "Google login functionality coming soon!",
+        title: `Welcome ${user.displayName}! You have logged in with Google.`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
+    } catch (error) {
+      console.error("Google Sign-In Error:", error);
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: "Failed to sign in with Google.",
+        text: error.message,
+        showConfirmButton: true,
+      });
+    }
   };
 
   return (
