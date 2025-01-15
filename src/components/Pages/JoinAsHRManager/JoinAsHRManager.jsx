@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const JoinAsHRManager = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
@@ -25,6 +27,7 @@ const JoinAsHRManager = () => {
         showConfirmButton: false,
         timer: 1500
       });
+      navigate("/packages")
   };
 
   return (

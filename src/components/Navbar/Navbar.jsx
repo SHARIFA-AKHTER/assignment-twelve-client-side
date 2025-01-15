@@ -1,10 +1,10 @@
-
 import React, { useContext, useState } from "react";
-import { AuthContext } from "../../Providers/AuthProvider"; 
+import { AuthContext } from "../../Providers/AuthProvider";
 import logo1 from "../../assets/image/logo-1.png";
+import { MdDashboard } from "react-icons/md";
 
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext); 
+  const { user, logOut } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Toggle mobile menu
@@ -15,7 +15,7 @@ const Navbar = () => {
   // Logout function
   const handleLogout = async () => {
     try {
-      await logOut(); 
+      await logOut();
       console.log("User logged out successfully");
     } catch (error) {
       console.error("Error logging out:", error.message);
@@ -23,7 +23,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white">
+    <nav className="sticky top-0 bg-gray-800 text-white z-50">
       {/* Navbar Container */}
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         {/* Logo Section */}
@@ -53,7 +53,14 @@ const Navbar = () => {
             href="/secret"
             className="hover:text-blue-400 transition duration-200"
           >
-           Secret
+            Secret
+          </a>
+
+          <a href="/" className="hover:text-blue-400 transition duration-200">
+            <button class="btn">
+              <MdDashboard className="mr-2"></MdDashboard>
+              <div class="badge badge-secondary">+0</div>
+            </button>
           </a>
         </div>
 
@@ -63,7 +70,10 @@ const Navbar = () => {
             <div className="flex items-center space-x-2">
               {/* User Info */}
               <img
-                src={user.photoURL || "https://i.ibb.co.com/q07vF3P/Asset-manager.jpg"}
+                src={
+                  user.photoURL ||
+                  "https://i.ibb.co.com/q07vF3P/Asset-manager.jpg"
+                }
                 alt="User"
                 className="h-8 w-8 rounded-full"
               />
@@ -126,7 +136,10 @@ const Navbar = () => {
       {/* Mobile Dropdown Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden px-4 pb-4 space-y-2">
-          <a href="/" className="block hover:text-blue-400 transition duration-200">
+          <a
+            href="/"
+            className="block hover:text-blue-400 transition duration-200"
+          >
             Home
           </a>
           <a
