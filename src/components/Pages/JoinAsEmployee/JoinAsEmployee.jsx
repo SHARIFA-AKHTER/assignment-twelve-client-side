@@ -115,7 +115,7 @@
 
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
-import { AuthContext } from './../../../Providers/AuthProvider';
+import { AuthContext } from "./../../../Providers/AuthProvider";
 import MonthlyRequests from "../MonthlyRequests/MonthlyRequests";
 import PendingRequests from "../PendingRequests/PendingRequests";
 import ExtraSections from "../ExtraSection/ExtraSection";
@@ -130,12 +130,10 @@ const JoinAsEmployee = () => {
   });
   const [isAffiliated, setIsAffiliated] = useState(false);
 
-  // Handle input changes for form fields
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Handle sign-up functionality
   const handleSignup = () => {
     const affiliatedStatus = formData.email.includes("@company.com");
     setIsAffiliated(affiliatedStatus);
@@ -153,13 +151,12 @@ const JoinAsEmployee = () => {
         position: "top-end",
         icon: "warning",
         title: "You are not affiliated with any company.",
-        text: "Contact with your HR for assistance.",
+        text: "Contact your HR for assistance.",
         showConfirmButton: true,
       });
     }
   };
 
-  // Handle Google login functionality
   const handleGoogleLogin = async () => {
     try {
       const result = await googleSignIn();
@@ -195,7 +192,6 @@ const JoinAsEmployee = () => {
     }
   };
 
-  // Handle logout functionality
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -216,16 +212,16 @@ const JoinAsEmployee = () => {
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header Section */}
-      <header className="bg-blue-600 text-white p-4 flex justify-between items-center">
-        <div className="flex items-center">
+      <header className="bg-blue-600 text-white p-4 flex flex-col sm:flex-row sm:justify-between items-center space-y-4 sm:space-y-0">
+        <div className="flex items-center space-x-3">
           <img
             src="https://i.ibb.co.com/ysDj0qN/M-logo.jpg"
             alt="Company Logo"
             className="h-10 w-10 rounded-full"
           />
-          <h1 className="ml-3 font-bold text-xl">Employee Dashboard</h1>
+          <h1 className="font-bold text-xl">Employee Dashboard</h1>
         </div>
-        <nav className="space-x-4">
+        <nav className="space-x-4 text-center">
           <a href="#home" className="hover:underline">
             Home
           </a>
@@ -250,7 +246,7 @@ const JoinAsEmployee = () => {
                 alt="User Profile"
                 className="h-8 w-8 rounded-full"
               />
-              <span>{user.displayName || "Employee"}</span>
+              <span className="hidden sm:inline">{user.displayName || "Employee"}</span>
             </>
           )}
           {user ? (
@@ -272,10 +268,10 @@ const JoinAsEmployee = () => {
       </header>
 
       {/* Main Section */}
-      <main className="p-8">
+      <main className="p-4 sm:p-8">
         {!isAffiliated && (
           <div className="bg-white p-6 rounded shadow-md max-w-lg mx-auto">
-            <h2 className="text-2xl font-bold mb-4 text-blue-600">
+            <h2 className="text-2xl font-bold mb-4 text-blue-600 text-center">
               Join as an Employee
             </h2>
             <form className="space-y-4">
@@ -317,7 +313,7 @@ const JoinAsEmployee = () => {
           </div>
         )}
         {isAffiliated && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             <PendingRequests />
             <MonthlyRequests />
             <ExtraSections />

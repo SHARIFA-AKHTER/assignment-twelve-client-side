@@ -10,7 +10,12 @@ import Secret from "../Layout/MainLayout/Secret/Secret";
 import JoinAsEmployee from "../components/Pages/JoinAsEmployee/JoinAsEmployee";
 import JoinAsHRManager from "../components/Pages/JoinAsHRManager/JoinAsHRManager";
 import Dashboard from "../Layout/MainLayout/Dashboard";
-import Cart from "../Layout/MainLayout/Cart/Cart";
+import HrDashboard from "../Layout/MainLayout/Hr-Dashboard/HrDashboard";
+import PendingRequest from "../Layout/PendingRequest";
+import RequestedItems from "../Layout/RequestedItems";
+import StockItems from "../Layout/StockItems";
+import EmployeeBirthdays from "../Layout/EmployeeBirthdays";
+import PieChart from "../Layout/PieChart";
 
 export const router = createBrowserRouter([
   {
@@ -64,8 +69,28 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "cart",
-        element: <Cart></Cart>
+        path: "hr-dashboard",
+        element: <HrDashboard></HrDashboard>
+      },
+      {
+        path: "pending-request",
+        element: <PendingRequest></PendingRequest>
+      },
+      {
+        path: "requested-items",
+        element: <RequestedItems></RequestedItems>
+      },
+      {
+        path: "stock-items",
+        element: <StockItems></StockItems>
+      },
+      {
+        path: "pie-chart",
+        element: <PieChart></PieChart>
+      },
+      {
+        path: "employee-birthdays",
+        element: <EmployeeBirthdays></EmployeeBirthdays>
       },
     ],
   },

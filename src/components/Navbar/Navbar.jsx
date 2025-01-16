@@ -273,7 +273,7 @@ const Navbar = () => {
             </>
           )}
 
-          <Link to="/dashboard/cart" className="hover:text-blue-400 transition duration-200">
+          <Link to="/dashboard/hr-dashboard" className="hover:text-blue-400 transition duration-200">
             <button className="btn">
               <MdDashboard className="mr-2" />
               <div className="badge badge-secondary">+0</div>
