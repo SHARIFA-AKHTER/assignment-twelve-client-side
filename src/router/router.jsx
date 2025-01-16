@@ -9,6 +9,8 @@ import PrivateRoute from "./PrivateRoute";
 import Secret from "../Layout/MainLayout/Secret/Secret";
 import JoinAsEmployee from "../components/Pages/JoinAsEmployee/JoinAsEmployee";
 import JoinAsHRManager from "../components/Pages/JoinAsHRManager/JoinAsHRManager";
+import Dashboard from "../Layout/MainLayout/Dashboard";
+import Cart from "../Layout/MainLayout/Cart/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +52,20 @@ export const router = createBrowserRouter([
       {
         path: "/join-as-hr-manager",
         element: <JoinAsHRManager></JoinAsHRManager>,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "cart",
+        element: <Cart></Cart>
       },
     ],
   },
