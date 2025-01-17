@@ -16,6 +16,8 @@ import RequestedItems from "../Layout/RequestedItems";
 import StockItems from "../Layout/StockItems";
 import EmployeeBirthdays from "../Layout/EmployeeBirthdays";
 import PieChart from "../Layout/PieChart";
+import RequestAsset from "../components/requestAsset/requestAsset";
+import MyRequestedAssets from "../components/MyRequestedAssets/MyRequestedAssets";
 
 export const router = createBrowserRouter([
   {
@@ -58,8 +60,18 @@ export const router = createBrowserRouter([
         path: "/join-as-hr-manager",
         element: <JoinAsHRManager></JoinAsHRManager>,
       },
+      {
+        path: "/request-asset",
+        element:<MyRequestedAssets></MyRequestedAssets>
+      },
+      {
+        path: "/request-asset",
+        element:<RequestAsset></RequestAsset>
+      },
     ],
   },
+
+  // dashboard
   {
     path: "/dashboard",
     element: (

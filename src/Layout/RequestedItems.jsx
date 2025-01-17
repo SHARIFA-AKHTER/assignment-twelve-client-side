@@ -28,9 +28,9 @@ const RequestedItems = () => {
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
               <tr className="bg-gray-100">
-                <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">#</th>
-                <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Item Name</th>
-                <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Request Count</th>
+                <th className="text-left px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base font-semibold">#</th>
+                <th className="text-left px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base font-semibold">Item Name</th>
+                <th className="text-left px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base font-semibold">Request Count</th>
               </tr>
             </thead>
             <tbody>
@@ -41,9 +41,9 @@ const RequestedItems = () => {
                     index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
                   } hover:bg-orange-100`}
                 >
-                  <td className="px-4 py-2 border border-gray-300 text-sm">{index + 1}</td>
-                  <td className="px-4 py-2 border border-gray-300 text-sm font-medium">{item.name}</td>
-                  <td className="px-4 py-2 border border-gray-300 text-sm">{item.requestCount}</td>
+                  <td className="px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base">{index + 1}</td>
+                  <td className="px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base font-medium">{item.name}</td>
+                  <td className="px-4 py-2 border border-gray-300 text-xs sm:text-sm md:text-base">{item.requestCount}</td>
                 </tr>
               ))}
             </tbody>

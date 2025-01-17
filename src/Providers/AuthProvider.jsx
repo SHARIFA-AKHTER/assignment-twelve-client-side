@@ -10,6 +10,7 @@ import {
       updateProfile
     } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
+import { GithubAuthProvider } from "firebase/auth/web-extension";
 export const AuthContext = createContext(null)
 const auth = getAuth(app);
 const AuthProvider = ({children}) => {
@@ -32,6 +33,17 @@ const googleSignIn = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider); 
 };
+
+ // Sign in with GitHub
+ const loginWithGithub = async () => {
+    const provider = new GithubAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      setUser(result.user); 
+    } catch (error) {
+      console.error("GitHub Sign-In Error:", error.message);
+    }
+  };
 const logOut = ()=>{
     setLoading(true)
     return signOut(auth)
@@ -59,7 +71,8 @@ const updateUserProfile = (name, photo)=>{
         signIn,
         logOut,
         updateUserProfile,
-        googleSignIn 
+        googleSignIn,
+        loginWithGithub
     }
     return (
         <AuthContext.Provider value={AuthInfo}>
