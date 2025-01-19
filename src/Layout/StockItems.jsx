@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const StockItems = () => {
   const [limitedStock, setLimitedStock] = useState([]);
+  const [loading, setLoading] = useState(true);  // To handle loading state
+  const [error, setError] = useState(null);      // To handle errors
 
   // Fetch data from the backend
   useEffect(() => {
@@ -11,7 +13,10 @@ const StockItems = () => {
         const data = await response.json();
         setLimitedStock(data);
       } catch (error) {
+        setError('Error fetching limited stock items');
         console.error('Error fetching limited stock items:', error);
+      } finally {
+        setLoading(false);  // Stop loading once the data is fetched or error occurs
       }
     };
 
@@ -21,35 +26,29 @@ const StockItems = () => {
   return (
     <div className="p-4">
       <h2 className="text-3xl font-bold mb-6 text-center">Limited Stock Items</h2>
-      {limitedStock.length === 0 ? (
+
+      {loading ? (
+        <p className="text-center text-gray-500">Loading...</p>
+      ) : error ? (
+        <p className="text-center text-red-500">{error}</p>
+      ) : limitedStock.length === 0 ? (
         <p className="text-center text-gray-500">No limited stock items found.</p>
       ) : (
         <div className="overflow-x-auto">
-          {/* Table for Desktop and Tablet */}
-          <div className="hidden sm:block">
-            <table className="min-w-full border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">#</th>
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Item Name</th>
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Quantity</th>
-                </tr>
-              </thead>
-              <tbody>
-                {limitedStock.map((item, index) => (
-                  <tr
-                    key={index}
-                    className={`${
-                      index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                    } hover:bg-orange-100`}
-                  >
-                    <td className="px-4 py-2 border border-gray-300 text-sm">{index + 1}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-sm font-medium">{item.name}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-sm">{item.quantity}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          {/* Card Layout for Desktop and Tablet */}
+          <div className="hidden sm:grid sm:grid-cols-3 sm:gap-6">
+            {limitedStock.map((item, index) => (
+              <div
+                key={index}
+                className="bg-white border border-gray-300 rounded-lg shadow-md p-4 mb-4"
+              >
+                <h3 className="font-medium text-lg">{item.name}</h3>
+                <p className="text-sm text-gray-600 mt-1">Quantity: {item.quantity}</p>
+                {item.quantity < 10 && (
+                  <p className="text-red-500 font-semibold mt-2">Low Stock</p>
+                )}
+              </div>
+            ))}
           </div>
 
           {/* Card Layout for Mobile */}
@@ -63,9 +62,9 @@ const StockItems = () => {
                   <p className="font-medium text-lg">{item.name}</p>
                   <span className="text-sm font-medium">{item.quantity}</span>
                 </div>
-                <div className="mt-2">
-                  <p className="text-sm">Stock # {index + 1}</p>
-                </div>
+                {item.quantity < 10 && (
+                  <p className="text-red-500 font-semibold text-sm mt-2">Low Stock</p>
+                )}
               </div>
             ))}
           </div>

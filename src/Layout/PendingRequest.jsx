@@ -1,92 +1,82 @@
-import React, { useEffect, useState } from 'react';
 
-const PendingRequest = () => {
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+const PendingRequests = () => {
   const [pendingRequests, setPendingRequests] = useState([]);
 
-  // Fetch data from the backend
+  // Fetch pending requests data
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
-        const response = await fetch('http://localhost:3000/pending');
-        const data = await response.json();
-        setPendingRequests(data);
+        const response = await axios.get("http://localhost:3000/pending");
+        setPendingRequests(response.data.slice(0, 5)); 
       } catch (error) {
-        console.error('Error fetching pending requests:', error);
+        console.error("Error fetching pending requests:", error);
       }
     };
 
     fetchPendingRequests();
   }, []);
 
-  return (
-    <div className="p-4">
-      <h2 className="text-3xl font-bold mb-6 text-center">Pending Requests</h2>
-      {pendingRequests.length === 0 ? (
-        <p className="text-center text-gray-500">No pending requests found.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          {/* Table for Desktop and Tablets */}
-          <div className="hidden sm:block">
-            <table className="min-w-full table-auto border-collapse border border-gray-300">
-              <thead>
-                <tr className="bg-gray-100">
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">#</th>
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Item Name</th>
-                  <th className="text-left px-4 py-2 border border-gray-300 text-sm font-semibold">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {pendingRequests.map((request, index) => (
-                  <tr
-                    key={index}
-                    className={`${
-                      index % 2 === 0 ? 'bg-white' : 'bg-gray-50'
-                    } hover:bg-orange-100`}
-                  >
-                    <td className="px-4 py-2 border border-gray-300 text-sm">{index + 1}</td>
-                    <td className="px-4 py-2 border border-gray-300 text-sm font-medium">{request.itemName}</td>
-                    <td
-                      className={`px-4 py-2 border border-gray-300 text-sm font-medium ${
-                        request.status === 'Pending'
-                          ? 'text-orange-600'
-                          : 'text-green-600'
-                      }`}
-                    >
-                      {request.status}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+  const handleApprove = (id) => {
+    // Approve request logic
+    console.log(`Approved request with ID: ${id}`);
+  };
 
-          {/* Card Layout for Mobile */}
-          <div className="block sm:hidden">
-            {pendingRequests.map((request, index) => (
-              <div
-                key={index}
-                className="bg-white border border-gray-300 mb-4 p-4 rounded-lg shadow-md"
-              >
-                <div className="flex justify-between items-center">
-                  <p className="font-medium text-lg">{request.itemName}</p>
-                  <span
-                    className={`text-sm font-medium ${
-                      request.status === 'Pending' ? 'text-orange-600' : 'text-green-600'
-                    }`}
-                  >
-                    {request.status}
-                  </span>
-                </div>
-                <div className="mt-2">
-                  <p className="text-sm">Request ID: {index + 1}</p>
-                </div>
+  const handleReject = (id) => {
+    // Reject request logic
+    console.log(`Rejected request with ID: ${id}`);
+  };
+
+  return (
+    <div className="bg-gray-50 py-10">
+      <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg">
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-8">
+          Pending Requests
+        </h2>
+        <ul className="space-y-4">
+          {pendingRequests.map((request) => (
+            <li
+              key={request.id}
+              className="p-4 bg-white rounded-lg shadow-md border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4"
+            >
+              <div>
+                <h3 className="text-lg font-semibold text-gray-800">
+                  {request.employeeName}
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  <span className="font-medium text-gray-700">
+                    Requested Item:
+                  </span>{" "}
+                  {request.itemName}
+                </p>
+                <p className="text-gray-600 text-sm">
+                  <span className="font-medium text-gray-700">Date:</span>{" "}
+                  {new Date(request.requestDate).toLocaleDateString()}
+                </p>
+                <p className="text-orange-500 font-medium">Status: Pending</p>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => handleApprove(request.id)}
+                  className="bg-green-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-green-600"
+                >
+                  Approve
+                </button>
+                <button
+                  onClick={() => handleReject(request.id)}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600"
+                >
+                  Reject
+                </button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
 
-export default PendingRequest;
+export default PendingRequests;

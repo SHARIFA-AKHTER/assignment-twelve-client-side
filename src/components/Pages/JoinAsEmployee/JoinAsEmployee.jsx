@@ -116,9 +116,7 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "./../../../Providers/AuthProvider";
-import MonthlyRequests from "../MonthlyRequests/MonthlyRequests";
-import PendingRequests from "../PendingRequests/PendingRequests";
-import ExtraSections from "../ExtraSection/ExtraSection";
+
 
 const JoinAsEmployee = () => {
   const { googleSignIn, githubSignIn, user } = useContext(AuthContext);
@@ -248,14 +246,7 @@ const JoinAsEmployee = () => {
           </button>
         </div>
       </div>
-      {/* Render components only if user is logged in */}
-      {user && (
-        <div>
-          <MonthlyRequests></MonthlyRequests>
-          <PendingRequests></PendingRequests>
-          <ExtraSections></ExtraSections>
-        </div>
-      )}
+     
     </div>
   );
 };

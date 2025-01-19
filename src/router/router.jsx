@@ -89,26 +89,26 @@ export const router = createBrowserRouter([
         element: <MyAssetsDashboard></MyAssetsDashboard>
       },
      
-      {
-        path: "pending-request",
-        element: <PendingRequest></PendingRequest>
-      },
-      {
-        path: "requested-items",
-        element: <RequestedItems></RequestedItems>
-      },
-      {
-        path: "stock-items",
-        element: <StockItems></StockItems>
-      },
-      {
-        path: "pie-chart",
-        element: <PieChart></PieChart>
-      },
-      {
-        path: "employee-birthdays",
-        element: <EmployeeBirthdays></EmployeeBirthdays>
-      },
+      // {
+      //   path: "pending-request",
+      //   element: <PendingRequest></PendingRequest>
+      // },
+      // {
+      //   path: "requested-items",
+      //   element: <RequestedItems></RequestedItems>
+      // },
+      // {
+      //   path: "stock-items",
+      //   element: <StockItems></StockItems>
+      // },
+      // {
+      //   path: "pie-chart",
+      //   element: <PieChart></PieChart>
+      // },
+      // {
+      //   path: "employee-birthdays",
+      //   element: <EmployeeBirthdays></EmployeeBirthdays>
+      // },
       {
         path: "payment",
         element: <Payment></Payment>

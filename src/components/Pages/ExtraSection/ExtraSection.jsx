@@ -34,7 +34,7 @@ const ExtraSections = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-xl font-bold mb-4">Extra Sections</h2>
+      <h2 className="text-xl font-bold mb-4">Company MetUp</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {extras.map((extra) => (
           <div
