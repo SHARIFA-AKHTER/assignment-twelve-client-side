@@ -7,7 +7,7 @@ function PendingRequests() {
 
   useEffect(() => {
     // Simulate an API call to fetch pending requests
-    fetch('http://localhost:5000/requests')
+    fetch('http://localhost:3000/requests')
       .then(response => response.json())
       .then(data => {
         setRequests(data);

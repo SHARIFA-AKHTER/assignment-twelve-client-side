@@ -7,7 +7,7 @@ function MonthlyRequests() {
 
   useEffect(() => {
     // Fetch requests from the API
-    fetch("http://localhost:5000/requests")
+    fetch("http://localhost:3000/requests")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

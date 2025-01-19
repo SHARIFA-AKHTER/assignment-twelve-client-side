@@ -7,7 +7,7 @@ const StockItems = () => {
   useEffect(() => {
     const fetchLimitedStock = async () => {
       try {
-        const response = await fetch('http://localhost:5000/limitedStock');
+        const response = await fetch('http://localhost:3000/limitedStock');
         const data = await response.json();
         setLimitedStock(data);
       } catch (error) {

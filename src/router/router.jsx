@@ -10,7 +10,7 @@ import Secret from "../Layout/MainLayout/Secret/Secret";
 import JoinAsEmployee from "../components/Pages/JoinAsEmployee/JoinAsEmployee";
 import JoinAsHRManager from "../components/Pages/JoinAsHRManager/JoinAsHRManager";
 import Dashboard from "../Layout/MainLayout/Dashboard";
-import HrDashboard from "../Layout/MainLayout/Hr-Dashboard/HrDashboard";
+import HrDashboard from "../Layout/MainLayout/MyAssets-Dashboard/MyAssetsDashboard";
 import PendingRequest from "../Layout/PendingRequest";
 import RequestedItems from "../Layout/RequestedItems";
 import StockItems from "../Layout/StockItems";
@@ -18,6 +18,9 @@ import EmployeeBirthdays from "../Layout/EmployeeBirthdays";
 import PieChart from "../Layout/PieChart";
 import RequestAsset from "../components/requestAsset/requestAsset";
 import MyRequestedAssets from "../components/MyRequestedAssets/MyRequestedAssets";
+import MyAssetsDashboard from "../Layout/MainLayout/MyAssets-Dashboard/MyAssetsDashboard";
+import MyTeam from "../components/Pages/MyTeam/MyTeam";
+import Payment from "../Layout/Payment/payment";
 
 export const router = createBrowserRouter([
   {
@@ -60,13 +63,14 @@ export const router = createBrowserRouter([
         path: "/join-as-hr-manager",
         element: <JoinAsHRManager></JoinAsHRManager>,
       },
-      {
-        path: "/request-asset",
-        element:<MyRequestedAssets></MyRequestedAssets>
-      },
+     
       {
         path: "/request-asset",
         element:<RequestAsset></RequestAsset>
+      },
+      {
+        path: "/team",
+        element:<MyTeam></MyTeam>
       },
     ],
   },
@@ -81,9 +85,10 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "hr-dashboard",
-        element: <HrDashboard></HrDashboard>
+        path: "my-assets-dashboard",
+        element: <MyAssetsDashboard></MyAssetsDashboard>
       },
+     
       {
         path: "pending-request",
         element: <PendingRequest></PendingRequest>
@@ -103,6 +108,10 @@ export const router = createBrowserRouter([
       {
         path: "employee-birthdays",
         element: <EmployeeBirthdays></EmployeeBirthdays>
+      },
+      {
+        path: "payment",
+        element: <Payment></Payment>
       },
     ],
   },

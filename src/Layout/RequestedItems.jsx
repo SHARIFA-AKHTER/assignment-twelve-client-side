@@ -1,15 +1,17 @@
+
+
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const RequestedItems = () => {
   const [requestedItems, setRequestedItems] = useState([]);
 
-  // Fetch data from the backend
+  // Fetch data from the backend using axios
   useEffect(() => {
     const fetchRequestedItems = async () => {
       try {
-        const response = await fetch('http://localhost:5000/mostRequested');
-        const data = await response.json();
-        setRequestedItems(data);
+        const response = await axios.get('http://localhost:3000/mostRequested');
+        setRequestedItems(response.data);
       } catch (error) {
         console.error('Error fetching requested items:', error);
       }

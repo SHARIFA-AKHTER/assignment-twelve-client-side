@@ -18,14 +18,14 @@ const Dashboard = () => {
           Pending Requests</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/hr-dashboard">
+          <NavLink to="/dashboard/my-assets-dashboard">
           <MdDashboard></MdDashboard>
-          Hr-Dashboard</NavLink>
+          MyAssets-Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="/dashboard/requested-items">
+          <NavLink to="/dashboard/payment">
           <GiTemplarHeart></GiTemplarHeart>
-          Requested Items</NavLink>
+          Payment</NavLink>
         </li>
         <li>
           <NavLink to="/dashboard/stock-items">

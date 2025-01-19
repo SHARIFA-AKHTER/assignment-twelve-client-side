@@ -7,7 +7,7 @@ const PendingRequest = () => {
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
-        const response = await fetch('http://localhost:5000/pending');
+        const response = await fetch('http://localhost:3000/pending');
         const data = await response.json();
         setPendingRequests(data);
       } catch (error) {

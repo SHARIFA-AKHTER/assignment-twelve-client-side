@@ -8,7 +8,7 @@ const EmployeeBirthdays = () => {
   // Fetch data when the component mounts
   useEffect(() => {
     axios
-      .get('http://localhost:5000/birthdays') // Replace with your API endpoint
+      .get('http://localhost:3000/birthdays') 
       .then((response) => {
         setBirthdays(response.data);
         setLoading(false);
