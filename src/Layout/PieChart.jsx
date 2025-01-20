@@ -33,7 +33,6 @@ const PieChart = () => {
     };
   return (
     <div>
-      <h2>pie chart</h2>
       <div className="p-4">
         <h2 className="text-2xl font-bold text-center mb-6">
           Item Returnability Stats
