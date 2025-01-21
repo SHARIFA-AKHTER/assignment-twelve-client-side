@@ -39,9 +39,17 @@ const MyAssetsDashboard = () => {
   // Cancel request
   const cancelRequest = async (id) => {
     try {
-      await axios.patch(`http://localhost:3000/assets/${id}/cancel`);
+      console.log("Cancelling request for asset with ID:", id);
+      await axios.patch(`http://localhost:3000/assets/cancel/${id}`);
+
+      console.log("Before filtering assets:", assets);
+
       setAssets(assets.filter((asset) => asset._id !== id));
+
+      console.log("After filtering assets:", assets.filter((asset) => asset._id !== id));
+      console.log(`Asset with ID ${id} has been successfully canceled.`);
     } catch (err) {
+      console.error("Failed to cancel the request:", err);
       alert("Failed to cancel the request.");
     }
   };
@@ -49,7 +57,7 @@ const MyAssetsDashboard = () => {
   // Return asset
   const returnAsset = async (id) => {
     try {
-      await axios.patch(`http://localhost:3000/assets/${id}/return`);
+      await axios.patch(`http://localhost:3000/assets/return/${id}`);
       setAssets(
         assets.map((asset) =>
           asset._id === id ? { ...asset, status: "returned" } : asset
