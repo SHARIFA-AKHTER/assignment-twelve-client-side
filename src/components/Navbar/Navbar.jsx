@@ -284,7 +284,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom"; // Use Link from react-router-dom for internal navigation
-import logo1 from "../../assets/image/M-logo.jpg"
+
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

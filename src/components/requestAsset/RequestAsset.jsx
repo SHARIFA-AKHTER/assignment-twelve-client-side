@@ -44,7 +44,7 @@ const RequestAsset = () => {
       await axios.post('http://localhost:3000/requests', requestData);
       setModalOpen(false);
       setAdditionalNotes('');
-      fetchAssets(); // Refresh the asset list after request
+      fetchAssets(); 
     } catch (error) {
       console.error("Error submitting request:", error);
     }

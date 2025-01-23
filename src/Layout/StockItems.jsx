@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 
 const StockItems = () => {
   const [limitedStock, setLimitedStock] = useState([]);
-  const [loading, setLoading] = useState(true);  // To handle loading state
-  const [error, setError] = useState(null);      // To handle errors
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null);     
 
   // Fetch data from the backend
   useEffect(() => {
@@ -16,7 +16,7 @@ const StockItems = () => {
         setError('Error fetching limited stock items');
         console.error('Error fetching limited stock items:', error);
       } finally {
-        setLoading(false);  // Stop loading once the data is fetched or error occurs
+        setLoading(false);  
       }
     };
 

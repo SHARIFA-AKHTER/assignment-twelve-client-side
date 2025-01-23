@@ -9,12 +9,6 @@ const Dashboard = () => {
       {/* Dashboard side bar */}
       <div className="w-64 min-h-screen bg-orange-400">
       <ul className="menu p-4">
-{/*         
-        <li>
-          <NavLink to="/dashboard/pending-request">
-          <IoGitPullRequestSharp></IoGitPullRequestSharp>
-          Pending Requests</NavLink>
-        </li> */}
         <li>
           <NavLink to="/dashboard/my-assets-dashboard">
           <MdDashboard></MdDashboard>
@@ -25,21 +19,7 @@ const Dashboard = () => {
           <GiTemplarHeart></GiTemplarHeart>
           Payment</NavLink>
         </li>
-        {/* <li>
-          <NavLink to="/dashboard/stock-items">
-          <GiStockpiles></GiStockpiles>
-          Stock Items </NavLink>
-        </li>
-        <li>
-          <NavLink to="/dashboard/pie-chart">
-          <FaArchive></FaArchive>
-          Pie Chart </NavLink>
-        </li>
-        <li>
-          <NavLink to="/dashboard/employee-birthdays">
-          <FaBirthdayCake />
-          Employee Birthdays</NavLink>
-        </li> */}
+       
         <div className="divider"></div>
         <li>
           <NavLink to="/">
