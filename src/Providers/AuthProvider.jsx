@@ -10,7 +10,7 @@ import {
     updateProfile,
     GithubAuthProvider 
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config"; // Firebase configuration
+import { app } from "../firebase/firebase.config"; 
 
 // Create Context
 export const AuthContext = createContext(null);
@@ -19,8 +19,8 @@ export const AuthContext = createContext(null);
 const auth = getAuth(app);
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); // Track current user
-    const [loading, setLoading] = useState(true); // Track loading state
+    const [user, setUser] = useState(null); 
+    const [loading, setLoading] = useState(true); 
 
     // Create a new user with email and password
     const createUser = (email, password) => {
@@ -67,9 +67,9 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             console.log("Current user:", currentUser);
-            setLoading(false); // Stop loading when user state is determined
+            setLoading(false); 
         });
-        return () => unsubscribe(); // Cleanup subscription on unmount
+        return () => unsubscribe();
     }, []);
 
     // Define the Auth Context value
