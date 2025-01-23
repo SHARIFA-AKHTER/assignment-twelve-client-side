@@ -10,17 +10,13 @@ import Secret from "../Layout/MainLayout/Secret/Secret";
 import JoinAsEmployee from "../components/Pages/JoinAsEmployee/JoinAsEmployee";
 import JoinAsHRManager from "../components/Pages/JoinAsHRManager/JoinAsHRManager";
 import Dashboard from "../Layout/MainLayout/Dashboard";
-import HrDashboard from "../Layout/MainLayout/MyAssets-Dashboard/MyAssetsDashboard";
-import PendingRequest from "../Layout/PendingRequest";
-import RequestedItems from "../Layout/RequestedItems";
-import StockItems from "../Layout/StockItems";
-import EmployeeBirthdays from "../Layout/EmployeeBirthdays";
-import PieChart from "../Layout/PieChart";
+
 import RequestAsset from "../components/requestAsset/requestAsset";
-import MyRequestedAssets from "../components/MyRequestedAssets/MyRequestedAssets";
 import MyAssetsDashboard from "../Layout/MainLayout/MyAssets-Dashboard/MyAssetsDashboard";
 import MyTeam from "../components/Pages/MyTeam/MyTeam";
 import Payment from "../Layout/Payment/payment";
+import Profile from "../components/Pages/Profile/Profile";
+import MyAssets from "../components/Pages/MyAssets/MyAssets";
 
 export const router = createBrowserRouter([
   {
@@ -72,6 +68,14 @@ export const router = createBrowserRouter([
         path: "/team",
         element:<MyTeam></MyTeam>
       },
+      {
+        path: "/profile",
+        element:<Profile></Profile>
+      },
+      {
+        path: "/assets",
+        element:<MyAssets></MyAssets>
+      },
     ],
   },
 
@@ -89,26 +93,7 @@ export const router = createBrowserRouter([
         element: <MyAssetsDashboard></MyAssetsDashboard>
       },
      
-      // {
-      //   path: "pending-request",
-      //   element: <PendingRequest></PendingRequest>
-      // },
-      // {
-      //   path: "requested-items",
-      //   element: <RequestedItems></RequestedItems>
-      // },
-      // {
-      //   path: "stock-items",
-      //   element: <StockItems></StockItems>
-      // },
-      // {
-      //   path: "pie-chart",
-      //   element: <PieChart></PieChart>
-      // },
-      // {
-      //   path: "employee-birthdays",
-      //   element: <EmployeeBirthdays></EmployeeBirthdays>
-      // },
+     
       {
         path: "payment",
         element: <Payment></Payment>

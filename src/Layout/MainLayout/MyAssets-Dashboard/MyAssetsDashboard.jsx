@@ -36,18 +36,24 @@ const MyAssetsDashboard = () => {
     fetchAssets();
   }, [search, status, assetType]);
 
-  // Cancel request
-  const cancelRequest = async (id) => {
+    const cancelRequest = async (id) => {
     try {
       console.log("Cancelling request for asset with ID:", id);
-      await axios.patch(`http://localhost:3000/assets/cancel/${id}`);
+      // Send request to the backend
+      const response = await axios.patch(
+        `http://localhost:3000/assets/cancel/${id}`
+      );
 
-      console.log("Before filtering assets:", assets);
+      if (response.data.message === "Request cancelled successfully") {
+        console.log("Before filtering assets:", assets);
 
-      setAssets(assets.filter((asset) => asset._id !== id));
+        // Update state by filtering out the canceled asset
+        const updatedAssets = assets.filter((asset) => asset._id !== id);
+        setAssets(updatedAssets); // Update state with the new list
 
-      console.log("After filtering assets:", assets.filter((asset) => asset._id !== id));
-      console.log(`Asset with ID ${id} has been successfully canceled.`);
+        console.log("After filtering assets:", updatedAssets);
+        alert(`Asset with ID ${id} has been successfully canceled.`);
+      }
     } catch (err) {
       console.error("Failed to cancel the request:", err);
       alert("Failed to cancel the request.");

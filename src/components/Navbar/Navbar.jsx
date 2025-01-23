@@ -284,7 +284,7 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom"; // Use Link from react-router-dom for internal navigation
-
+import logo1 from "../../assets/image/M-logo.jpg"
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -305,8 +305,7 @@ const Navbar = () => {
   };
 
   // Check if the user is HR Manager
-  const isHRManager = user?.role === "HR Manager"; // Assuming `role` is part of the user object
-
+  const isHRManager = user?.role === "HR Manager"; 
   return (
     <nav className="sticky top-0 bg-gray-800 text-white z-50">
       {/* Navbar Container */}
@@ -314,8 +313,7 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="flex items-center">
           <img
-            src={isHRManager ? user?.companyLogo : "defaultLogo.png"} // Display company logo for HR Manager
-            alt="Logo"
+            src={isHRManager ? user?.companyLogo : "https://i.ibb.co.com/BsFG5QF/logo-1.png"} 
             className="h-8 w-8 mr-2"
           />
           <span className="text-xl font-bold">ManageMate</span>

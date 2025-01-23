@@ -1,37 +1,4 @@
 
-// import { Helmet } from 'react-helmet-async';
-// import About from './About/About';
-// import Banner from './Banner/Banner';
-// import Packages from './Packages/Packages';
-// import MonthlyRequests from './../Pages/MonthlyRequests/MonthlyRequests';
-// import PendingRequest from './../../Layout/PendingRequest';
-// import ExtraSections from './../Pages/ExtraSection/ExtraSection';
-// import RequestedItems from '../../Layout/RequestedItems';
-// import StockItems from '../../Layout/StockItems';
-// import PieChart from '../../Layout/PieChart';
-
-
-// const Home = () => {
-//     return (
-//         <div>
-//           <Helmet>
-//             <title>ManageMate | Home</title>
-//           </Helmet>
-//           <Banner></Banner>
-//           <About></About>
-//           <Packages></Packages>
-//           <PendingRequest></PendingRequest>
-//           <MonthlyRequests></MonthlyRequests>
-//           <ExtraSections></ExtraSections> 
-//           <PendingRequest></PendingRequest> 
-//           <RequestedItems></RequestedItems> 
-//           <StockItems></StockItems>  
-//           <PieChart></PieChart>                           
-//         </div>
-//     );
-// };
-
-// export default Home;
 
 import { Helmet } from "react-helmet-async";
 import About from "./About/About";
@@ -42,15 +9,14 @@ import PendingRequest from "../../Layout/PendingRequest";
 import ExtraSections from "../Pages/ExtraSection/ExtraSection";
 import RequestedItems from "../../Layout/RequestedItems";
 import StockItems from "../../Layout/StockItems";
-import PieChart from "../../Layout/PieChart";
 // import Calendar from "../Pages/Calendar/Calendar";
 // import Events from "../Pages/Events/Events";
 
 // Mock user data for demonstration (replace with real auth/context data)
 const user = {
-  role: "HR Manager", // or "Normal Employee"
-  isAffiliated: true, // set to false if the user is not affiliated with any company
-  isPaid: true, // for HR Manager, checks if payment is complete
+  role: "HR Manager", 
+  isAffiliated: true, 
+  isPaid: true, 
 };
 
 const Home = () => {

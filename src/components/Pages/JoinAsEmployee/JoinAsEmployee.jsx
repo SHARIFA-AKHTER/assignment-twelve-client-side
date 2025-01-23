@@ -116,10 +116,12 @@
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "./../../../Providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 
 const JoinAsEmployee = () => {
-  const { googleSignIn, githubSignIn, user } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const { googleSignIn, githubSignIn, } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -140,6 +142,7 @@ const JoinAsEmployee = () => {
       showConfirmButton: false,
       timer: 1500,
     });
+    navigate("/")
   };
 
   const handleGoogleLogin = async () => {
