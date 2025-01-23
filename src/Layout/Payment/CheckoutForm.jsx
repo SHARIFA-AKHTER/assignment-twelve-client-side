@@ -15,7 +15,7 @@ const CheckoutForm = () => {
     const fetchPaymentIntent = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/requests/create-payment-intent",
+          "https://assignment-twelve-server-iota.vercel.app/requests/create-payment-intent",
           {
            
             amount: 1000, 

@@ -198,9 +198,7 @@ const Home = () => {
             {/* Limited Stock Items */}
             <section className="my-8">
               <StockItems maxQuantity={10} />
-            </section>
-
-           
+            </section>         
 
             {/* Extra Sections */}
             <section className="my-8">
@@ -210,8 +208,11 @@ const Home = () => {
             <section className="my-8">
               <Calendar />
             </section>
-
+            <section className="my-8">
             <Events></Events>
+            </section>
+
+            
           </>
         ) : (
           <div className="my-8 text-center">

@@ -41,7 +41,7 @@ const Profile = () => {
 
       // Update profile in the backend
       const response = await axios.put(
-        `http://localhost:3000/users/update-profile/${user?.uid}`,
+        `https://assignment-twelve-server-iota.vercel.app/users/update-profile/${user?.uid}`,
         { fullName, email: user.email, photoURL }
       );
 

@@ -7,7 +7,7 @@ function MonthlyRequests() {
 
   useEffect(() => {
     // Fetch requests from the API
-    fetch("http://localhost:3000/requests")
+    fetch("https://assignment-twelve-server-iota.vercel.app/requests")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Failed to fetch data");

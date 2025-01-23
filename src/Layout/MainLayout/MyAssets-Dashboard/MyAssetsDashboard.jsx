@@ -23,7 +23,7 @@ const MyAssetsDashboard = () => {
       try {
         setLoading(true);
         const params = { name: search, status, assetType };
-        const { data } = await axios.get("http://localhost:3000/assets", {
+        const { data } = await axios.get("https://assignment-twelve-server-iota.vercel.app/assets", {
           params,
         });
         setAssets(data);
@@ -41,7 +41,7 @@ const MyAssetsDashboard = () => {
       console.log("Cancelling request for asset with ID:", id);
       // Send request to the backend
       const response = await axios.patch(
-        `http://localhost:3000/assets/cancel/${id}`
+        `https://assignment-twelve-server-iota.vercel.app/assets/cancel/${id}`
       );
 
       if (response.data.message === "Request cancelled successfully") {
@@ -63,7 +63,7 @@ const MyAssetsDashboard = () => {
   // Return asset
   const returnAsset = async (id) => {
     try {
-      await axios.patch(`http://localhost:3000/assets/return/${id}`);
+      await axios.patch(`https://assignment-twelve-server-iota.vercel.app/assets/return/${id}`);
       setAssets(
         assets.map((asset) =>
           asset._id === id ? { ...asset, status: "returned" } : asset

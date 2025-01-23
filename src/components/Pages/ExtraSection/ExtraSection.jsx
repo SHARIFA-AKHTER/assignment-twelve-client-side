@@ -8,7 +8,7 @@ const ExtraSections = () => {
   useEffect(() => {
     const fetchExtras = async () => {
       try {
-        const response = await fetch("http://localhost:3000/extra"); 
+        const response = await fetch("https://assignment-twelve-server-iota.vercel.app/extra"); 
         if (!response.ok) {
           throw new Error("Failed to fetch extra sections");
         }

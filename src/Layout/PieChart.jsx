@@ -9,7 +9,7 @@ const PieChart = () => {
     useEffect(() => {
       const fetchStats = async () => {
         try {
-          const response = await fetch('http://localhost:3000/pieChart');
+          const response = await fetch('https://assignment-twelve-server-iota.vercel.app/pieChart');
           const data = await response.json();
           setStats(data);
         } catch (error) {
