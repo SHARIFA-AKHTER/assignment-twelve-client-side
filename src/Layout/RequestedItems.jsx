@@ -10,7 +10,7 @@ const RequestedItems = () => {
   useEffect(() => {
     const fetchRequestedItems = async () => {
       try {
-        const response = await axios.get("https://assignment-twelve-server-iota.vercel.app/mostRequested");
+        const response = await axios.get("http://localhost:3000/mostRequested");
         setRequestedItems(response.data);
       } catch (error) {
         console.error("Error fetching requested items:", error);

@@ -14,7 +14,7 @@ const MyAssets = () => {
     const fetchAssets = async (query = {}) => {
         try {
             const queryParams = new URLSearchParams(query).toString();
-            const response = await axios.get(`https://assignment-twelve-server-iota.vercel.app/assets?${queryParams}`);
+            const response = await axios.get(`/assets?${queryParams}`);
             setAssets(response.data);
         } catch (error) {
             console.error('Error fetching assets:', error.message);
@@ -34,7 +34,7 @@ const MyAssets = () => {
     // Cancel asset request
     const handleCancel = async (id) => {
         try {
-            await axios.put(`https://assignment-twelve-server-iota.vercel.app/assets/assets/cancel/${id}`);
+            await axios.put(`http://localhost:3000/assets/assets/cancel/${id}`);
             fetchAssets(); 
         } catch (error) {
             console.error('Error canceling asset request:', error.message);
@@ -44,7 +44,7 @@ const MyAssets = () => {
     // Return asset
     const handleReturn = async (id) => {
         try {
-            await axios.put(`https://assignment-twelve-server-iota.vercel.app/assets/assets/return/${id}`);
+            await axios.put(`http://localhost:3000/assets/assets/return/${id}`);
             fetchAssets();
         } catch (error) {
             console.error('Error returning asset:', error.message);

@@ -8,7 +8,7 @@ const EmployeeBirthdays = () => {
   // Fetch data when the component mounts
   useEffect(() => {
     axios
-      .get('https://assignment-twelve-server-iota.vercel.app/birthdays') 
+      .get('http://localhost:3000/birthdays') 
       .then((response) => {
         setBirthdays(response.data);
         setLoading(false);

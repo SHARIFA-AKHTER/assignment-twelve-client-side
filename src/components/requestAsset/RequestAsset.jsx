@@ -12,7 +12,7 @@ const RequestAsset = () => {
   // Fetch assets based on search and filters
   const fetchAssets = async () => {
     try {
-      const response = await axios.get('https://assignment-twelve-server-iota.vercel.app/assets', {
+      const response = await axios.get('http://localhost:3000/assets', {
         params: { ...filters, search: searchTerm },
       });
       setAssets(response.data);
@@ -41,7 +41,7 @@ const RequestAsset = () => {
     };
 
     try {
-      await axios.post('https://assignment-twelve-server-iota.vercel.app/requests', requestData);
+      await axios.post('http://localhost:3000/requests', requestData);
       setModalOpen(false);
       setAdditionalNotes('');
       fetchAssets(); 

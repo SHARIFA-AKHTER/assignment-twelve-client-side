@@ -9,7 +9,7 @@ const PendingRequests = () => {
   useEffect(() => {
     const fetchPendingRequests = async () => {
       try {
-        const response = await axios.get("https://assignment-twelve-server-iota.vercel.app/pending");
+        const response = await axios.get("http://localhost:3000/pending");
         setPendingRequests(response.data.slice(0, 5)); 
       } catch (error) {
         console.error("Error fetching pending requests:", error);
