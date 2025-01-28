@@ -1,3 +1,5 @@
+import SectionTitle from "../../SectionTitle/SectionTitle";
+
 const Packages = () => {
   const packages = [
     {
@@ -21,14 +23,11 @@ const Packages = () => {
     <section className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 py-16">
       <div className="container mx-auto px-4">
         {/* Section Title */}
-        <h2 className="text-4xl font-extrabold text-center text-white mb-6">
-          Our Packages
-        </h2>
-        <p className="text-center text-white mb-12 text-lg">
-          Choose a package that fits your team size and needs. Get started with ease and enhance your team's productivity.
-        </p>
-
-        {/* Cards Container */}
+        <SectionTitle
+          heading={"Our Packages"}
+          subHeading={"  Choose a package that fits your team size and needs. Get started with ease and enhance your team's productivity."}
+        ></SectionTitle>
+      
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {packages.map((pkg, index) => (
             <div

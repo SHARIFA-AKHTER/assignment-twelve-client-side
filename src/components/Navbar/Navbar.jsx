@@ -3,8 +3,7 @@
 import React, { useContext, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdDashboard } from "react-icons/md";
-import { Link } from "react-router-dom"; // Use Link from react-router-dom for internal navigation
-
+import { Link } from "react-router-dom"; 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -89,7 +88,7 @@ const Navbar = () => {
                 Profile
               </Link>
             </>
-          ) : (
+          ) :  (
             <>
               <Link to="/" className="hover:text-blue-400 transition duration-200">
                 Home
@@ -236,7 +235,7 @@ const Navbar = () => {
                 Logout
               </button>
             </>
-          ) : (
+          ) :  (
             <>
               <Link
                 to="/assets"

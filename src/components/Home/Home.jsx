@@ -1,112 +1,4 @@
 
-// import { Helmet } from "react-helmet-async";
-// import About from "./About/About";
-// import Banner from "./Banner/Banner";
-// import Packages from "./Packages/Packages";
-// import MonthlyRequests from "../Pages/MonthlyRequests/MonthlyRequests";
-// import PendingRequest from "../../Layout/PendingRequest";
-// import ExtraSections from "../Pages/ExtraSection/ExtraSection";
-// import RequestedItems from "../../Layout/RequestedItems";
-// import StockItems from "../../Layout/StockItems";
-// import Calendar from "../Calendar";
-// import Events from "../Events";
-
-
-// const user = {
-//   role: "Normal Employee", 
-//   isAffiliated: true, 
-//   isPaid: true, 
-// };
-
-// const Home = () => {
-//   return (
-//     <div>
-//       {/* Dynamic Title */}
-//       <Helmet>
-//         <title>ManageMate | Home</title>
-//       </Helmet>
-
-//       {/* Static Sections */}
-//       <Banner />
-//       <About />
-//       <Packages />
-
-//       {/* Conditional Rendering Based on User Role */}
-//       {user.role === "Normal Employee" ? (
-//         user.isAffiliated ? (
-//           <>
-//             {/* My Pending Requests */}
-//             <section className="my-8">
-//               <PendingRequest />
-//             </section>
-
-//             {/* My Monthly Requests */}
-//             <section className="my-8">
-//               <MonthlyRequests sortBy="recent" />
-//             </section>
-
-//           </>
-//         ) : (
-//           <div className="my-8 text-center">
-//             <h3 className="text-xl font-semibold text-red-500">
-//               You are not affiliated with any company.
-//             </h3>
-//             <p>Please contact your HR Manager for further assistance.</p>
-//           </div>
-//         )
-//       ) : user.role === "HR Manager" ? (
-//         user.isPaid ? (
-//           <>
-//             {/* Pending Requests */}
-//             <section className="my-8">
-//               <PendingRequest maxItems={5} />
-//             </section>
-
-//             {/* Top Most Requested Items */}
-//             <section className="my-8">
-//               <RequestedItems maxItems={4} />
-//             </section>
-
-//             {/* Limited Stock Items */}
-//             <section className="my-8">
-//               <StockItems maxQuantity={10} />
-//             </section>         
-
-//             {/* Extra Sections */}
-//             <section className="my-8">
-//               <ExtraSections />
-//             </section>
-
-//             <section className="border  my-4 overflow-hidden">
-//               <Calendar />
-//             </section>          
-//             <section className="border  my-4 overflow-hidden">
-//               <Events />
-//             </section>          
-                 
-//           </>
-//         ) : (
-//           <div className="my-8 text-center">
-//             <h3 className="text-xl font-semibold text-red-500">
-//               Access Restricted
-//             </h3>
-//             <p>
-//               Access to the HR Manager account requires payment. Please complete
-//               the payment to continue.
-//             </p>
-//           </div>
-//         )
-//       ) : (
-//         <div className="my-8 text-center">
-//           <h3 className="text-xl font-semibold text-red-500">Access Denied</h3>
-//           <p>Invalid role or insufficient permissions.</p>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Home;
 
 import { Helmet } from "react-helmet-async";
 import About from "./About/About";
@@ -158,6 +50,12 @@ const Home = () => {
             <section className="my-8">
               <MonthlyRequests sortBy="recent" />
             </section>
+            <section className="border my-4 overflow-hidden">
+              <Calendar />
+            </section>
+            <section className="border my-4 overflow-hidden">
+              <Events />
+            </section>
           </>
         ) : (
           <Message
@@ -180,12 +78,7 @@ const Home = () => {
             <section className="my-8">
               <ExtraSections />
             </section>
-            <section className="border my-4 overflow-hidden">
-              <Calendar />
-            </section>
-            <section className="border my-4 overflow-hidden">
-              <Events />
-            </section>
+            
           </>
         ) : (
           <Message
