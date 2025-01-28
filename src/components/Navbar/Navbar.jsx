@@ -1,30 +1,39 @@
 
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Providers/AuthProvider";
 import { MdDashboard } from "react-icons/md";
 import { Link } from "react-router-dom"; 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [localUser, setLocalUser] = useState(null);
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setLocalUser(JSON.parse(storedUser));
+    }
+  }, []);
   // Toggle mobile menu
   const handleToggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  // Logout function
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      console.log("User logged out successfully");
-    } catch (error) {
-      console.error("Error logging out:", error.message);
-    }
-  };
+    // Logout function
+    const handleLogout = async () => {
+      try {
+        await logOut();
+        localStorage.removeItem("user");
+        setLocalUser(null);
+        console.log("User logged out successfully");
+      } catch (error) {
+        console.error("Error logging out:", error.message);
+      }
+    };
 
-  // Check if the user is HR Manager
-  const isHRManager = user?.role === "HR Manager"; 
+  const currentUser = user || localUser; 
+  const isHRManager = currentUser?.role === "HR Manager"; 
   return (
     <nav className="sticky top-0 bg-gray-800 text-white z-50">
       {/* Navbar Container */}
@@ -32,7 +41,7 @@ const Navbar = () => {
         {/* Logo Section */}
         <div className="flex items-center">
           <img
-            src={isHRManager ? user?.companyLogo : "https://i.ibb.co.com/BsFG5QF/logo-1.png"} 
+            src={isHRManager ? currentUser?.companyLogo : "https://i.ibb.co.com/BsFG5QF/logo-1.png"} 
             className="h-8 w-8 mr-2"
           />
           <span className="text-xl font-bold">ManageMate</span>
@@ -40,7 +49,7 @@ const Navbar = () => {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center space-x-6">
-          {!user ? (
+          {!currentUser ? (
             <>
               <Link to="/" className="hover:text-blue-400 transition duration-200">
                 Home

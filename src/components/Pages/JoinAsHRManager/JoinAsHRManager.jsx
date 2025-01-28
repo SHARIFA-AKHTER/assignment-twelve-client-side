@@ -36,6 +36,10 @@ const JoinAsHRManager = () => {
 
   const handleSignup = () => {
     if (!validateForm()) return;
+
+    // Save the form data to localStorage
+    localStorage.setItem("hrManagerData", JSON.stringify(formData));
+
     Swal.fire({
       position: "top-end",
       icon: "success",
@@ -62,7 +66,7 @@ const JoinAsHRManager = () => {
             ) : (
               <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
                 <span className="text-gray-500">
-                <img src="https://i.ibb.co.com/ysDj0qN/M-logo.jpg" alt="" />
+                  <img src="https://i.ibb.co.com/ysDj0qN/M-logo.jpg" alt="" />
                 </span>
               </div>
             )}
