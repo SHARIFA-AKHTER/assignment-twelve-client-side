@@ -36,6 +36,11 @@ const Dashboard = () => {
           <MdDashboard></MdDashboard>
          Asset-List</NavLink>
         </li>
+        <li>
+          <NavLink to="/add-asset">
+          <MdDashboard></MdDashboard>
+         Add-Asset</NavLink>
+        </li>
       </ul>
       </div>
       {/* Dashboard content */}

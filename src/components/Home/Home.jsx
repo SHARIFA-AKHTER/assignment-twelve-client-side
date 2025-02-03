@@ -210,6 +210,7 @@ const Home = () => {
               <PendingRequest maxItems={5} />
               <RequestedItems maxItems={4} />
               <StockItems maxQuantity={10} />
+              
               <ExtraSections className="col-span-1 md:col-span-2 lg:col-span-3" />
             </div>
           ) : (
