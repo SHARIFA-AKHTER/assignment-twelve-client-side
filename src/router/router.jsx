@@ -17,6 +17,11 @@ import MyTeam from "../components/Pages/MyTeam/MyTeam";
 import Payment from "../Layout/Payment/payment";
 import Profile from "../components/Pages/Profile/Profile";
 import MyAssets from "../components/Pages/MyAssets/MyAssets";
+import AddEmployee from "../components/Pages/JoinAsEmployee/AddEmployee";
+import AssetList from "../components/Hr-Asset/AssetList";
+import AddAsset from "../components/Hr-Asset/AddAsset";
+import AllRequests from "../components/Hr-Asset/AllRequests";
+import EmployeeList from "../components/Hr-Asset/EmployeeList";
 
 export const router = createBrowserRouter([
   {
@@ -76,6 +81,31 @@ export const router = createBrowserRouter([
         path: "/assets",
         element:<MyAssets></MyAssets>
       },
+      {
+        path: "/asset-list",
+        element:<AssetList></AssetList>
+      },
+      {
+        path: "/add-asset",
+        element:<AddAsset></AddAsset>
+      },
+      {
+        path: "/all-requests",
+        element:<AllRequests></AllRequests>
+      },
+      {
+        path: "/employee-list",
+        element:<EmployeeList></EmployeeList>
+      },
+      {
+        path: "/add-employee",
+        element:<AddEmployee></AddEmployee>
+      },
+      {
+        path: "/profile",
+        element:<Profile></Profile>
+      },
+
     ],
   },
 
@@ -92,7 +122,10 @@ export const router = createBrowserRouter([
         path: "my-assets-dashboard",
         element: <MyAssetsDashboard></MyAssetsDashboard>
       },
-     
+    //  {
+    //     path: "add-employee",
+    //     element:<AddEmployee></AddEmployee>
+    //  },
      
       {
         path: "payment",

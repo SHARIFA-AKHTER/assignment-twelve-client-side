@@ -1,9 +1,8 @@
-
-
 import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
+import axios from "axios"; 
 
 const JoinAsEmployee = () => {
   const navigate = useNavigate();
@@ -19,12 +18,11 @@ const JoinAsEmployee = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    const isAffiliated = formData.email.endsWith("joya@jj.com");
+    const isAffiliated = formData.email.endsWith(""); 
     if (isAffiliated) {
-      // Save user data to localStorage
       const userData = {
         fullName: formData.fullName,
         email: formData.email,
@@ -32,16 +30,33 @@ const JoinAsEmployee = () => {
         role: "Normal Employee",
         isAffiliated: true,
       };
-      localStorage.setItem("user", JSON.stringify(userData));
 
-      Swal.fire({
-        title: "Success!",
-        text: "You are successfully registered.",
-        icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
-      });
-      navigate("/");
+      try {
+        // Axios POST request to save employee data in database
+        const response = await axios.post("http://localhost:3000/employee", userData);
+
+        if (response.data.insertedId) {
+          localStorage.setItem("user", JSON.stringify(userData));
+
+          Swal.fire({
+            title: "Success!",
+            text: "You are successfully registered.",
+            icon: "success",
+            timer: 1500,
+            showConfirmButton: false,
+          });
+
+          navigate("/");  
+        }
+      } catch (error) {
+        console.error("Error registering employee:", error);
+        Swal.fire({
+          title: "Registration Failed",
+          text: "Something went wrong! Please try again.",
+          icon: "error",
+          showConfirmButton: true,
+        });
+      }
     } else {
       Swal.fire({
         title: "Not Affiliated!",
@@ -52,33 +67,20 @@ const JoinAsEmployee = () => {
     }
   };
 
-  const handleSocialLogin = async (method, platform) => {
+  const handleSocialLogin = async (loginMethod, providerName) => {
     try {
-      const result = await method();
-      const user = result.user;
-
-      // Save user data to localStorage
-      const userData = {
-        fullName: user.displayName || `${platform} User`,
-        email: user.email,
-        role: "Normal Employee",
-        isAffiliated: true,
-      };
-      localStorage.setItem("user", JSON.stringify(userData));
-
+      await loginMethod();
       Swal.fire({
-        title: `Welcome, ${user.displayName || platform + " User"}!`,
-        text: `Logged in with ${platform}.`,
+        title: `${providerName} Login Success`,
+        text: `You are successfully logged in with ${providerName}`,
         icon: "success",
-        timer: 1500,
-        showConfirmButton: false,
+        showConfirmButton: true,
       });
-      navigate("/");
+      navigate("/");  
     } catch (error) {
-      console.error(`${platform} Login Error:`, error);
       Swal.fire({
-        title: `Failed to login with ${platform}.`,
-        text: error.message,
+        title: `${providerName} Login Failed`,
+        text: `There was an error while logging in with ${providerName}`,
         icon: "error",
         showConfirmButton: true,
       });

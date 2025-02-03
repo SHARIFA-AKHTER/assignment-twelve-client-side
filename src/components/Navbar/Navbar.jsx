@@ -14,12 +14,13 @@ const Navbar = () => {
     if (storedUser) {
       setLocalUser(JSON.parse(storedUser));
     }
-  }, []);
+  }, [user]);
   // Toggle mobile menu
   const handleToggleMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
+ 
     // Logout function
     const handleLogout = async () => {
       try {
@@ -34,6 +35,7 @@ const Navbar = () => {
 
   const currentUser = user || localUser; 
   const isHRManager = currentUser?.role === "HR Manager"; 
+  const isEmployee = currentUser?.role === "Normal Employee";
   return (
     <nav className="sticky top-0 bg-gray-800 text-white z-50">
       {/* Navbar Container */}
@@ -285,3 +287,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
