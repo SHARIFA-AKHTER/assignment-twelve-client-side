@@ -51,6 +51,7 @@ const Employee = () => {
               <p><span className="font-semibold">DOB:</span> {employee.position}</p>
               <p><span className="font-semibold">Company ID:</span> {employee.companyId}</p>
             </div>
+            <button className="btn btn-active btn-accent">Normal Employee</button>
           </div>
         ))}
       </div>

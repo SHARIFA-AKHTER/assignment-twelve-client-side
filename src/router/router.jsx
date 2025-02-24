@@ -22,115 +22,81 @@ import AssetList from "../components/Hr-Asset/AssetList";
 import AddAsset from "../components/Hr-Asset/AddAsset";
 import AllRequests from "../components/Hr-Asset/AllRequests";
 import EmployeeList from "../components/Hr-Asset/EmployeeList";
+import EmployeeDashboard from "../components/Pages/JoinAsEmployee/EmployeeDashboard";
+import ErrorPage from "../components/ErrorPage";
+import HRDashboard from "../components/Pages/JoinAsHRManager/HRDashboard";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: <MainLayout />,
     children: [
-      {
-        path: "/",
-        element: <Home></Home>,
-      },
-      {
-        path: "/about",
-        element: <About></About>,
-      },
-      {
-        path: "/packages",
-        element: <Packages></Packages>,
-      },
-      {
-        path: "/login",
-        element: <Login></Login>,
-      },
-      {
-        path: "/signup",
-        element: <SignUp></SignUp>,
-      },
+      { path: "/", element: <Home /> },
+      { path: "/about", element: <About /> },
+      { path: "/packages", element: <Packages /> },
+      { path: "/login", element: <Login /> },
+      { path: "/signup", element: <SignUp /> },
       {
         path: "/secret",
         element: (
           <PrivateRoute>
-            <Secret></Secret>
+            <Secret />
           </PrivateRoute>
         ),
       },
-      {
-        path: "/join-as-employee",
-        element: <JoinAsEmployee></JoinAsEmployee>,
-      },
-      {
-        path: "/join-as-hr-manager",
-        element: <JoinAsHRManager></JoinAsHRManager>,
-      },
-     
-      {
-        path: "/request-asset",
-        element:<RequestAsset></RequestAsset>
-      },
-      {
-        path: "/team",
-        element:<MyTeam></MyTeam>
-      },
-      {
-        path: "/profile",
-        element:<Profile></Profile>
-      },
-      {
-        path: "/assets",
-        element:<MyAssets></MyAssets>
-      },
-      {
-        path: "/asset-list",
-        element:<AssetList></AssetList>
-      },
-      {
-        path: "/add-asset",
-        element:<AddAsset></AddAsset>
-      },
-      {
-        path: "/all-requests",
-        element:<AllRequests></AllRequests>
-      },
-      {
-        path: "/employee-list",
-        element:<EmployeeList></EmployeeList>
-      },
-      {
-        path: "/add-employee",
-        element:<AddEmployee></AddEmployee>
-      },
-      {
-        path: "/profile",
-        element:<Profile></Profile>
-      },
-
+      { path: "/join-as-employee", element: <JoinAsEmployee /> },
+      { path: "/join-as-hr-manager", element: <JoinAsHRManager /> },
     ],
   },
 
-  // dashboard
+  // Employee Dashboard
   {
     path: "/dashboard",
     element: (
       <PrivateRoute>
-        <Dashboard></Dashboard>
+        <Dashboard />
       </PrivateRoute>
     ),
     children: [
       {
-        path: "my-assets-dashboard",
-        element: <MyAssetsDashboard></MyAssetsDashboard>
-      },
-    //  {
-    //     path: "add-employee",
-    //     element:<AddEmployee></AddEmployee>
-    //  },
-     
-      {
-        path: "payment",
-        element: <Payment></Payment>
+        path: "employee",
+        element: (
+          <PrivateRoute>
+            <EmployeeDashboard />
+          </PrivateRoute>
+        ),
+        children: [
+          { path: "request-asset", element: <RequestAsset /> },
+          { path: "team", element: <MyTeam /> },
+          { path: "profile", element: <Profile /> },
+          { path: "assets", element: <MyAssets /> },
+        ],
       },
     ],
   },
+
+  // HR Dashboard
+  {
+    path: "hr",
+    element: (
+      <PrivateRoute>
+        <HRDashboard />
+      </PrivateRoute>
+    ),
+    children: [
+      { path: "my-assets", element: <MyAssetsDashboard /> },
+      { path: "payment", element: <Payment /> },
+      { path: "asset-list", element: <AssetList /> },
+      { path: "add-asset", element: <AddAsset /> },
+      { path: "all-requests", element: <AllRequests /> },
+      { path: "employee-list", element: <EmployeeList /> },
+      { path: "add-employee", element: <AddEmployee /> },
+      { path: "profile", element: <Profile /> },
+    ],
+  },
+
+  // 404 Page
+  { path: "*", element: <ErrorPage /> },
 ]);
+
+export default router;

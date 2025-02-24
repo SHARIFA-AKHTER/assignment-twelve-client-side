@@ -47,7 +47,7 @@ const JoinAsHRManager = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    navigate("/dashboard/payment", { state: { formData } });
+    navigate("/hr/payment", { state: { formData } });
   };
 
   return (

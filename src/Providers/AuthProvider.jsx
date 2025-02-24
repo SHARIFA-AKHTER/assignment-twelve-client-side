@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { 
+import {
     createUserWithEmailAndPassword,
     getAuth,
     GoogleAuthProvider,
@@ -8,20 +8,39 @@ import {
     signInWithPopup,
     signOut,
     updateProfile,
-    GithubAuthProvider 
+    GithubAuthProvider
 } from "firebase/auth";
-import { app } from "../firebase/firebase.config"; 
+import { app } from "../firebase/firebase.config";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 // Create Context
 export const AuthContext = createContext(null);
 
 // Initialize Firebase Auth
 const auth = getAuth(app);
+const firestore = getFirestore(app);
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null); 
-    const [loading, setLoading] = useState(true); 
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [role, setRole] = useState(null);
 
+    //fetch user role
+    const fetchUserRole = async (userId) => {
+        const userDoc = doc(firestore, "users", uid);
+        const docSnap = await getDoc(userDoc);
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            setRole(userData.role);
+        }
+    };
+    useEffect(() => {
+        // Example: Check if user data is available in localStorage or from an API
+        const loggedInUser = localStorage.getItem('user');
+        if (loggedInUser) {
+            setUser(JSON.parse(loggedInUser));
+        }
+    }, []);
     // Create a new user with email and password
     const createUser = (email, password) => {
         setLoading(true);
@@ -32,6 +51,7 @@ const AuthProvider = ({ children }) => {
     const signIn = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
+       
     };
 
     // Sign in with Google
@@ -52,6 +72,7 @@ const AuthProvider = ({ children }) => {
     const logOut = () => {
         setLoading(true);
         return signOut(auth);
+       
     };
 
     // Update user profile (name and photo)
@@ -64,10 +85,13 @@ const AuthProvider = ({ children }) => {
 
     // Track the currently logged-in user
     useEffect(() => {
+
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
-            console.log("Current user:", currentUser);
-            setLoading(false); 
+            if (currentUser) {
+                fetchUserRole(currentUser.uid);
+            }
+            setLoading(false);
         });
         return () => unsubscribe();
     }, []);
@@ -76,6 +100,7 @@ const AuthProvider = ({ children }) => {
     const AuthInfo = {
         user,
         loading,
+        role,
         createUser,
         signIn,
         logOut,
@@ -93,3 +118,4 @@ const AuthProvider = ({ children }) => {
 };
 
 export default AuthProvider;
+

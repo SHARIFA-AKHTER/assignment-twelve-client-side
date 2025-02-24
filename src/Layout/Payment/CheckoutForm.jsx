@@ -13,20 +13,17 @@ const CheckoutForm = () => {
   // Fetch the PaymentIntent client secret on component mount
   useEffect(() => {
     const fetchPaymentIntent = async () => {
+     
       try {
-        const response = await axios.post(
-          "http://localhost:3000/requests/create-payment-intent",
-          {
-           
-            amount: 1000, 
-            currency: "usd", 
-          }
-        );
-        setClientSecret(response.data.clientSecret); 
+        const response = await axios.post("http://localhost:3000/create-payment-intent", {
+          price: 50, 
+        });
+    
+        setClientSecret(response.data.clientSecret);
       } catch (err) {
         console.error("Error creating payment intent:", err.message || err);
       }
-    };
+     };
 
     fetchPaymentIntent();
   }, []); 
@@ -79,7 +76,7 @@ const CheckoutForm = () => {
     }
 
     console.log("Payment successful:", paymentIntent);
-    setError(""); // Clear any errors
+    setError(""); 
   };
 
   return (
@@ -98,6 +95,7 @@ const CheckoutForm = () => {
               color: "#9e2146",
             },
           },
+          hidePostalCode: true, 
         }}
       />
 
