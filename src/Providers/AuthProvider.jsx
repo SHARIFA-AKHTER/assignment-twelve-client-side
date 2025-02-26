@@ -11,14 +11,14 @@ import {
     GithubAuthProvider
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
+// import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 // Create Context
 export const AuthContext = createContext(null);
 
 // Initialize Firebase Auth
 const auth = getAuth(app);
-const firestore = getFirestore(app);
+// const firestore = getFirestore(app);
 
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
@@ -26,21 +26,23 @@ const AuthProvider = ({ children }) => {
     const [role, setRole] = useState(null);
 
     //fetch user role
-    const fetchUserRole = async (userId) => {
-        const userDoc = doc(firestore, "users", uid);
-        const docSnap = await getDoc(userDoc);
-        if (docSnap.exists()) {
-            const userData = docSnap.data();
-            setRole(userData.role);
-        }
-    };
+    // const fetchUserRole = async (uid) => {
+    //     const userDoc = doc(firestore, "users", uid);
+    //     const docSnap = await getDoc(userDoc);
+    //     if (docSnap.exists()) {
+    //         const userData = docSnap.data();
+    //         setRole(userData.role);
+    //     }
+    // };
     useEffect(() => {
-        // Example: Check if user data is available in localStorage or from an API
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
-            setUser(JSON.parse(loggedInUser));
+            
+        } else {
+            setLoading(false); // No user in localStorage, just stop loading
         }
     }, []);
+
     // Create a new user with email and password
     const createUser = (email, password) => {
         setLoading(true);
@@ -70,13 +72,16 @@ const AuthProvider = ({ children }) => {
 
     // Log out the user
     const logOut = () => {
+        setUser(null);
+        setRole(null);
         setLoading(true);
         return signOut(auth);
        
     };
 
     // Update user profile (name and photo)
-    const updateUserProfile = (name, photo) => {
+    const updateUserProfile = (name, photo,newRole) => {
+        setRole(newRole); 
         return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photo
@@ -89,7 +94,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             if (currentUser) {
-                fetchUserRole(currentUser.uid);
+                // fetchUserRole(currentUser.uid);
             }
             setLoading(false);
         });

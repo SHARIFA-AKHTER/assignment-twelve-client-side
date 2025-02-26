@@ -3,6 +3,7 @@ import { AuthContext } from "../../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
@@ -20,11 +21,17 @@ const Login = () => {
 
     signIn(email, password)
     .then((result) => {
-      const user = result.user;
-      console.log(user);
-
-      // Save user data to localStorage
-      localStorage.setItem("user", JSON.stringify(user));
+      // const user = (result.user.email);
+      console.log('sign in',result.user.email);
+      const user = {email:email}
+       // Save user data to localStorage
+       localStorage.setItem("user", JSON.stringify(user));
+       console.log("User data saved to localStorage:", user);
+      axios.post('http://localhost:3000/jwt', user,{withCredentials: true})
+      .then(res =>{
+        console.log(res.data)
+      })
+      navigate(from, { replace: true });
 
       Swal.fire({
         title: "User Login Successful",
@@ -55,7 +62,7 @@ const Login = () => {
 
         // Save user data to localStorage
         localStorage.setItem("user", JSON.stringify(user));
-
+        console.log("Google user data saved to localStorage:", user);
       Swal.fire({
         title: "Google Login Successful",
         text: `Welcome, ${user.displayName}!`,

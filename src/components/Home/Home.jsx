@@ -9,36 +9,44 @@ import { AuthContext } from "../../Providers/AuthProvider";
 import Calendar from "../Calendar";
 import Events from "../Events";
 import Notice from "../../Layout/Notice";
+import RequestedItems from "../../Layout/RequestedItems";
+import StockItems from "../../Layout/StockItems";
+import ExtraSections from "../Pages/ExtraSection/ExtraSection";
 
 
 const Home = () => {
   const { user } = useContext(AuthContext); 
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
-      <Helmet>
-        <title>ManageMate | Home</title>
-      </Helmet>
-      
 
-      {!user ? (
-        <>
-          <Banner />
-          <About />
-          <Packages />
-          
-        </>
-      ) : (
-        <>
-          <PendingRequests />
-          <MonthlyRequests />
-          <Calendar></Calendar>
-          <Events></Events>
-         <Notice></Notice>
-        </>
-      )}
-      
-    </div>
+    <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
+    <Helmet>
+      <title>ManageMate | Home</title>
+    </Helmet>
+
+    {!user ? (
+      <>
+        <Banner />
+        <About />
+        <Packages />
+      </>
+    ) : (
+      <>
+       
+        {/* Other Sections */}
+        <PendingRequests />
+        <MonthlyRequests />
+        <Calendar />
+        <Events />
+        <Notice />
+
+        <RequestedItems></RequestedItems>
+        <PendingRequests></PendingRequests>
+        <StockItems></StockItems>
+        <ExtraSections></ExtraSections>
+      </>
+    )}
+  </div>
   );
 };
 

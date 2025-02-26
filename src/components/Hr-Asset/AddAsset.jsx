@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddAsset = () => {
   const [asset, setAsset] = useState({
@@ -7,6 +9,8 @@ const AddAsset = () => {
     type: "",
     quantity: "",
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setAsset({ ...asset, [e.target.name]: e.target.value });
@@ -17,10 +21,30 @@ const AddAsset = () => {
 
     try {
       const response = await axios.post("http://localhost:3000/assets", asset);
-      alert(response.data.message);
+      
+      // SweetAlert success message
+      Swal.fire({
+        icon: "success",
+        title: "Asset Added Successfully!",
+        text: response.data.message,
+        confirmButtonText: "OK"
+      }).then(() => {
+        // Navigate to dashboard after alert is dismissed
+        navigate("/dashboard");
+      });
+
+      // Reset form after submission
       setAsset({ name: "", type: "", quantity: "" });
     } catch (error) {
       console.error("Error adding asset:", error);
+
+      // SweetAlert error message
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: "Please try again later.",
+        confirmButtonText: "OK"
+      });
     }
   };
 

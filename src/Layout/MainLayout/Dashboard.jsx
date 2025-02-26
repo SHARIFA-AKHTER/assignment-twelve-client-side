@@ -152,20 +152,176 @@
 
 // export default Dashboard;
 
-import { MdDashboard } from "react-icons/md";
+// import { MdDashboard } from "react-icons/md";
+// import { NavLink, Outlet } from "react-router-dom";
+// import { FaClipboardList, FaHome } from "react-icons/fa";
+// import Navbar from "../../components/Navbar/Navbar";
+
+// const Dashboard = () => {
+//   return (
+//     <div className="flex min-h-screen">
+      
+//       {/* Dashboard Sidebar */}
+//       <div className="w-64 bg-orange-400 p-4">
+//         <h2 className="text-xl font-semibold mb-4">Employee Dashboard</h2>
+//         <ul className="space-y-4">
+//           {/* Employee Dashboard Links */}
+//           <li>
+//             <NavLink
+//               to="employee/assets"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <FaClipboardList />
+//               My Assets
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="employee/request-asset"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <FaClipboardList />
+//               My Requested Assets
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="employee/team"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <FaClipboardList />
+//               My Team
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="employee/profile"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <FaClipboardList />
+//               Profile
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <FaHome />
+//               Home
+//             </NavLink>
+//           </li>
+//         </ul>
+
+//         {/* HR Manager Sidebar */}
+//         <div className="divider my-6" />
+//         <h2 className="text-xl font-semibold mb-4">HR Manager Dashboard</h2>
+//         <ul className="space-y-4">
+//           <li>
+//             <NavLink
+//               to="/hr/asset-list"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               Asset List
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/add-asset"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               Add Asset
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/all-requests"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               All Requests
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/employee-list"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               Employee List
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/add-employee"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               Add Employee
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/profile"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               HR Profile
+//             </NavLink>
+//           </li>
+//           <li>
+//             <NavLink
+//               to="/hr/payment"
+//               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+//             >
+//               <MdDashboard />
+//               HR Payment
+//             </NavLink>
+//           </li>
+//         </ul>
+//       </div>
+
+//       {/* Dashboard Content Area */}
+//       <div className="flex-1 p-4 bg-gray-100">
+//       <Navbar></Navbar>
+//         <Outlet />
+       
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default Dashboard;
+
+import { useState } from "react";
+import { MdDashboard, MdMenu, MdClose } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import { FaClipboardList, FaHome } from "react-icons/fa";
 import Navbar from "../../components/Navbar/Navbar";
 
 const Dashboard = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
     <div className="flex min-h-screen">
-      
-      {/* Dashboard Sidebar */}
-      <div className="w-64 bg-orange-400 p-4">
+      {/* Sidebar Toggle Button for Mobile */}
+      <button
+        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-orange-500 text-white rounded"
+        onClick={() => setSidebarOpen(!sidebarOpen)}
+      >
+        {sidebarOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
+      </button>
+
+      {/* Sidebar */}
+      <div
+        className={`fixed md:relative top-0 left-0 w-64 bg-orange-400 p-4 transition-transform duration-300 ${
+          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 md:block z-40`}
+      >
         <h2 className="text-xl font-semibold mb-4">Employee Dashboard</h2>
         <ul className="space-y-4">
-          {/* Employee Dashboard Links */}
           <li>
             <NavLink
               to="employee/assets"
@@ -213,7 +369,6 @@ const Dashboard = () => {
           </li>
         </ul>
 
-        {/* HR Manager Sidebar */}
         <div className="divider my-6" />
         <h2 className="text-xl font-semibold mb-4">HR Manager Dashboard</h2>
         <ul className="space-y-4">
@@ -283,11 +438,10 @@ const Dashboard = () => {
         </ul>
       </div>
 
-      {/* Dashboard Content Area */}
+      {/* Main Content */}
       <div className="flex-1 p-4 bg-gray-100">
-      <Navbar></Navbar>
+        <Navbar />
         <Outlet />
-       
       </div>
     </div>
   );

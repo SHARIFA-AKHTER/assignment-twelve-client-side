@@ -41,7 +41,7 @@ const Profile = () => {
 
       // Update profile in the backend
       const response = await axios.put(
-        `http://localhost:3000/employee/:id/${user?.id}`,
+        `http://localhost:3000/employee/${user?.id}`,
         { fullName, email: user.email, photoURL }
       );
 

@@ -16,7 +16,7 @@ const Notices = () => {
       {notices.length ? (
         <ul>
           {notices.map(notice => (
-            <li key={notice.id} className="border p-2 my-2">{notice.message}</li>
+            <li key={notice.userId} className="border p-2 my-2">{notice.type}</li>
           ))}
         </ul>
       ) : (
