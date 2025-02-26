@@ -11,7 +11,6 @@ import {
     GithubAuthProvider
 } from "firebase/auth";
 import { app } from "../firebase/firebase.config";
-// import { doc, getDoc, getFirestore } from "firebase/firestore";
 
 // Create Context
 export const AuthContext = createContext(null);
@@ -25,21 +24,12 @@ const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [role, setRole] = useState(null);
 
-    //fetch user role
-    // const fetchUserRole = async (uid) => {
-    //     const userDoc = doc(firestore, "users", uid);
-    //     const docSnap = await getDoc(userDoc);
-    //     if (docSnap.exists()) {
-    //         const userData = docSnap.data();
-    //         setRole(userData.role);
-    //     }
-    // };
     useEffect(() => {
         const loggedInUser = localStorage.getItem('user');
         if (loggedInUser) {
             
         } else {
-            setLoading(false); // No user in localStorage, just stop loading
+            setLoading(false); 
         }
     }, []);
 
@@ -94,7 +84,7 @@ const AuthProvider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             if (currentUser) {
-                // fetchUserRole(currentUser.uid);
+               
             }
             setLoading(false);
         });

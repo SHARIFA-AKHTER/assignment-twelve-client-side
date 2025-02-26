@@ -3,14 +3,13 @@ import { Elements } from '@stripe/react-stripe-js';
 import React from 'react';
 import { loadStripe } from 'react-stripe-js';
 import CheckoutForm from './CheckoutForm';
-import { useNavigate, useLocation } from 'react-router-dom';  
+import { useLocation } from 'react-router-dom';  
 import Swal from 'sweetalert2';
 
 // Load the publishable key for Stripe
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_Gateway_PK || '');
 
 const Payment = () => {
-    const navigate = useNavigate();
     const { state } = useLocation();
 
     if (!import.meta.env.VITE_Payment_Gateway_PK) {
@@ -25,7 +24,7 @@ const Payment = () => {
             showConfirmButton: false,
             timer: 1500,
         });
-        navigate('/dashboard'); 
+       
     };
 
     return (

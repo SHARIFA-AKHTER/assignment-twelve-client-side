@@ -1,19 +1,20 @@
 import axios from "axios";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 
-const RequestAsset = () => {
+const RequestedAssets = () => {
   const [assets, setAssets] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [filters, setFilters] = useState({ availability: '', type: '' });
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedAsset, setSelectedAsset] = useState(null);
-  const [additionalNotes, setAdditionalNotes] = useState('');
+  const [filters, setFilters] = useState({ status: '', type: '' });
 
-  // Fetch assets based on search and filters
+  useEffect(() => {
+    fetchAssets();
+  }, [searchTerm, filters]);
+
   const fetchAssets = async () => {
     try {
       const response = await axios.get('http://localhost:3000/assets', {
-        params: { ...filters, search: searchTerm },
+        params: { search: searchTerm, ...filters },
       });
       setAssets(response.data);
     } catch (error) {
@@ -21,105 +22,142 @@ const RequestAsset = () => {
     }
   };
 
-  // Handle opening the modal for requesting an asset
-  const handleRequest = (asset) => {
-    setSelectedAsset(asset);
-    setModalOpen(true);
+  const handleCancel = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3000/assets/${id}`);
+      fetchAssets();
+    } catch (error) {
+      console.error("Error canceling request:", error);
+    }
   };
 
-  // Handle submitting the request
-  const handleSubmitRequest = async () => {
-    if (!selectedAsset) {
-      return alert("Please select an asset to request.");
-    }
-
-    const requestData = {
-      assetId: selectedAsset._id,
-      notes: additionalNotes,
-      requestDate: new Date().toISOString(),
-      user: { /* Add logged-in user data here */ },
-    };
-
+  const handleReturn = async (id) => {
     try {
-      await axios.post('http://localhost:3000/requests', requestData);
-      setModalOpen(false);
-      setAdditionalNotes('');
-      fetchAssets(); 
+      await axios.put(`http://localhost:3000/assets/${id}`, { status: "returned" });
+      fetchAssets();
     } catch (error) {
-      console.error("Error submitting request:", error);
+      console.error("Error returning asset:", error);
     }
   };
 
   return (
-    <div>
-      {/* Filter and Search Section */}
-      <div className="filter-section">
+    <div className="max-w-5xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-blue-600 mb-6">My Requested Assets</h2>
+
+      {/* Search & Filter */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <input
           type="text"
           placeholder="Search by asset name"
+          className="border p-2 w-full rounded"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <select onChange={(e) => setFilters({ ...filters, availability: e.target.value })}>
-          <option value="">Availability</option>
-          <option value="available">Available</option>
-          <option value="out-of-stock">Out of stock</option>
+        <select
+          className="border p-2 rounded"
+          onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+        >
+          <option value="">Status</option>
+          <option value="pending">Pending</option>
+          <option value="approved">Approved</option>
         </select>
-        <select onChange={(e) => setFilters({ ...filters, type: e.target.value })}>
+        <select
+          className="border p-2 rounded"
+          onChange={(e) => setFilters({ ...filters, type: e.target.value })}
+        >
           <option value="">Asset Type</option>
           <option value="returnable">Returnable</option>
           <option value="non-returnable">Non-returnable</option>
         </select>
-        <button onClick={fetchAssets}>Apply Filters</button>
       </div>
 
-      {/* Table Section for Assets */}
-      <div className="asset-table">
-        <table border="1" cellPadding="10" className="table">
+      {/* Responsive Table */}
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-300">
           <thead>
-            <tr>
-              <th>Asset Name</th>
-              <th>Type</th>
-              <th>Availability</th>
-              <th>Action</th>
+            <tr className="bg-gray-100 text-sm md:text-base">
+              <th className="border p-2">Asset Name</th>
+              <th className="border p-2">Asset Type</th>
+              <th className="border p-2 hidden md:table-cell">Request Date</th>
+              <th className="border p-2 hidden md:table-cell">Approval Date</th>
+              <th className="border p-2">Status</th>
+              <th className="border p-2">Action</th>
             </tr>
           </thead>
           <tbody>
             {assets.map((asset) => (
-              <tr key={asset._id}>
-                <td>{asset.name}</td>
-                <td>{asset.type}</td>
-                <td>{asset.availability}</td>
-                <td>
-                  <button
-                    onClick={() => handleRequest(asset)}
-                    disabled={asset.availability === 'out-of-stock'}
-                  >
-                    Request
-                  </button>
+              <tr key={asset._id} className="text-center text-sm md:text-base">
+                <td className="border p-2">{asset.name}</td>
+                <td className="border p-2">{asset.type}</td>
+                <td className="border p-2 hidden md:table-cell">{new Date(asset.requestDate).toLocaleDateString()}</td>
+                <td className="border p-2 hidden md:table-cell">{asset.status === "approved" ? new Date(asset.approvalDate).toLocaleDateString() : "-"}</td>
+                <td className="border p-2 capitalize">{asset.status}</td>
+                <td className="border p-2 flex flex-col md:flex-row justify-center gap-2">
+                  {asset.status === "pending" && (
+                    <button
+                      className="bg-red-500 text-white px-3 py-1 rounded text-sm md:text-base"
+                      onClick={() => handleCancel(asset._id)}
+                    >
+                      Cancel
+                    </button>
+                  )}
+                  {asset.status === "approved" && (
+                    <PDFDownloadLink
+                      document={<AssetPDF asset={asset} />}
+                      fileName="asset-details.pdf"
+                      className="bg-blue-500 text-white px-3 py-1 rounded text-sm md:text-base"
+                    >
+                      Print
+                    </PDFDownloadLink>
+                  )}
+                  {asset.status === "approved" && asset.type === "returnable" && (
+                    <button
+                      className="bg-green-500 text-white px-3 py-1 rounded text-sm md:text-base"
+                      onClick={() => handleReturn(asset._id)}
+                    >
+                      Return
+                    </button>
+                  )}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-
-      {/* Modal for Additional Notes and Request Submission */}
-      {modalOpen && (
-        <div className="modal">
-          <div className="modal-content">
-            <label>Additional Notes</label>
-            <input
-              type="text"
-              value={additionalNotes}
-              onChange={(e) => setAdditionalNotes(e.target.value)}
-            />
-            <button onClick={handleSubmitRequest}>Submit Request</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
-export default RequestAsset;
+// PDF Component
+const AssetPDF = ({ asset }) => (
+  <Document>
+    <Page size="A4" style={styles.page}>
+      <View style={styles.header}>
+        <Text style={styles.companyName}>Company Name</Text>
+        <Text style={styles.date}>Date: {new Date().toLocaleDateString()}</Text>
+      </View>
+      <View style={styles.body}>
+        <Text style={styles.title}>Asset Details</Text>
+        <Text>Asset Name: {asset.name}</Text>
+        <Text>Asset Type: {asset.type}</Text>
+        <Text>Request Date: {new Date(asset.requestDate).toLocaleDateString()}</Text>
+        <Text>Approval Date: {new Date(asset.approvalDate).toLocaleDateString()}</Text>
+      </View>
+      <View style={styles.footer}>
+        <Text>Printed on {new Date().toLocaleDateString()}</Text>
+      </View>
+    </Page>
+  </Document>
+);
+
+const styles = StyleSheet.create({
+  page: { padding: 20 },
+  header: { marginBottom: 20 },
+  companyName: { fontSize: 18, fontWeight: "bold" },
+  date: { fontSize: 12, textAlign: "right" },
+  body: { marginBottom: 20 },
+  title: { fontSize: 16, fontWeight: "bold", marginBottom: 10 },
+  footer: { position: "absolute", bottom: 10, fontSize: 12, textAlign: "center" },
+});
+
+export default RequestedAssets;

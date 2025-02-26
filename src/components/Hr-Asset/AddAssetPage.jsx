@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthProvider"; // ✅ Context for Authentication
+import { AuthContext } from "../context/AuthProvider"; 
 import AddAsset from "../components/AddAsset";
 
 const AddAssetPage = () => {
