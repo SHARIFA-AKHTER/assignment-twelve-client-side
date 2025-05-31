@@ -3,9 +3,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from './../../../Providers/AuthProvider';
+import { useContext } from "react";
 
 const JoinAsHRManager = () => {
   const navigate = useNavigate();
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const [formData, setFormData] = useState({
     fullName: "",
     companyName: "",
@@ -47,7 +50,7 @@ const JoinAsHRManager = () => {
       showConfirmButton: false,
       timer: 1500,
     });
-    navigate("/hr/payment", { state: { formData } });
+    navigate("/dashboard/hr/payment", { state: { formData } });
   };
 
   return (

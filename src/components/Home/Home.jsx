@@ -25,12 +25,14 @@ const Home = () => {
     </Helmet>
 
     {!user ? (
+            // If user is NOT logged in
       <>
         <Banner />
         <About />
         <Packages />
       </>
-    ) : (
+     ) : ( 
+          // If user IS logged in
       <>
        
         {/* Other Sections */}
@@ -45,9 +47,10 @@ const Home = () => {
         <StockItems></StockItems>
         <ExtraSections></ExtraSections>
       </>
-    )}
+     )} 
   </div>
   );
 };
 
 export default Home;
+

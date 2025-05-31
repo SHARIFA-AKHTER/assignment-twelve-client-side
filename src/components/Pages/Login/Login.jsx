@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -6,12 +6,11 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const Login = () => {
-  const { signIn, googleSignIn } = useContext(AuthContext);
+  const { signIn, googleSignIn, user, role, loading} = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
   const from = location.state?.from?.pathname || "/";
-
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -50,7 +49,7 @@ const Login = () => {
           `,
         },
       });
-      navigate(from, { replace: true });
+      
     });
   };
 
@@ -75,9 +74,10 @@ const Login = () => {
         },
       });
 
-      navigate(from, { replace: true });
+     
     });
   };
+
   return (
     <>
       <Helmet>

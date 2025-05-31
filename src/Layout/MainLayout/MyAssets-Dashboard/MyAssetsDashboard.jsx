@@ -49,8 +49,7 @@ const MyAssetsDashboard = () => {
 
         // Update state by filtering out the canceled asset
         const updatedAssets = assets.filter((asset) => asset._id !== id);
-        setAssets(updatedAssets); // Update state with the new list
-
+        setAssets(updatedAssets); 
         console.log("After filtering assets:", updatedAssets);
         alert(`Asset with ID ${id} has been successfully canceled.`);
       }

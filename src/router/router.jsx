@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout/MainLayout";
 import Home from "../components/Home/Home";
 import About from "../components/Home/About/About";
@@ -14,9 +14,9 @@ import Dashboard from "../Layout/MainLayout/Dashboard";
 import RequestAsset from "../components/requestAsset/requestAsset";
 import MyAssetsDashboard from "../Layout/MainLayout/MyAssets-Dashboard/MyAssetsDashboard";
 import MyTeam from "../components/Pages/MyTeam/MyTeam";
-import Payment from "../Layout/Payment/payment";
+
 import Profile from "../components/Pages/Profile/Profile";
-import MyAssets from "../components/Pages/MyAssets/MyAssets";
+
 import AddEmployee from "../components/Pages/JoinAsEmployee/AddEmployee";
 import AssetList from "../components/Hr-Asset/AssetList";
 import AddAsset from "../components/Hr-Asset/AddAsset";
@@ -25,6 +25,8 @@ import EmployeeList from "../components/Hr-Asset/EmployeeList";
 import EmployeeDashboard from "../components/Pages/JoinAsEmployee/EmployeeDashboard";
 import ErrorPage from "../components/ErrorPage";
 import HRDashboard from "../components/Pages/JoinAsHRManager/HRDashboard";
+import MyAssets from "../components/Pages/MyAssets/MyAssets";
+import Payment from "../Layout/Payment/Payment";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +61,10 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
+        index: true,
+        element: <Navigate to="/dashboard/employee" replace />
+      },
+      {
         path: "employee",
         element: (
           <PrivateRoute>
@@ -77,7 +83,7 @@ export const router = createBrowserRouter([
 
   // HR Dashboard
   {
-    path: "hr",
+    path: "/dashboard/hr",
     element: (
       <PrivateRoute>
         <HRDashboard />
@@ -100,3 +106,4 @@ export const router = createBrowserRouter([
 ]);
 
 export default router;
+

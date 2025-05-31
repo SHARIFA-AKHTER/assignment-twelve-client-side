@@ -15,8 +15,10 @@ const Notices = () => {
       <h2 className="text-lg font-semibold">📢 Notices</h2>
       {notices.length ? (
         <ul>
-          {notices.map(notice => (
-            <li key={notice.userId} className="border p-2 my-2">{notice.type}</li>
+          {notices.map((notice, index) => (
+            <li key={notice.id || index} className="border p-2 my-2">
+              {notice.type}
+            </li>
           ))}
         </ul>
       ) : (

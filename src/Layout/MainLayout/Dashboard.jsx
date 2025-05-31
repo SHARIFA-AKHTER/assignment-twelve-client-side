@@ -29,7 +29,7 @@ const Dashboard = () => {
         <ul className="space-y-4">
           <li>
             <NavLink
-              to="employee/assets"
+              to="/dashboard/employee/assets"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <FaClipboardList />
@@ -38,7 +38,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="employee/request-asset"
+              to="/dashboard/employee/request-asset"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <FaClipboardList />
@@ -47,7 +47,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="employee/team"
+              to="/dashboard/employee/team"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <FaClipboardList />
@@ -56,7 +56,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="employee/profile"
+              to="/dashboard/employee/profile"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <FaClipboardList />
@@ -79,7 +79,7 @@ const Dashboard = () => {
         <ul className="space-y-4">
           <li>
             <NavLink
-              to="/hr/asset-list"
+              to="/dashboard/hr/asset-list"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -88,7 +88,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/add-asset"
+              to="/dashboard/hr/add-asset"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -97,7 +97,16 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/all-requests"
+              to="/dashboard/hr/my-assets"
+              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+            >
+              <MdDashboard />
+              My assets Dashboard
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/dashboard/hr/all-requests"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -106,7 +115,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/employee-list"
+              to="/dashboard/hr/employee-list"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -115,7 +124,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/add-employee"
+              to="/dashboard/hr/add-employee"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -124,7 +133,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/profile"
+              to="/dashboard/hr/profile"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />
@@ -133,7 +142,7 @@ const Dashboard = () => {
           </li>
           <li>
             <NavLink
-              to="/hr/payment"
+              to="/dashboard/hr/payment"
               className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
             >
               <MdDashboard />

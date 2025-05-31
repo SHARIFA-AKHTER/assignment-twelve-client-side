@@ -8,7 +8,7 @@ const AllRequests = () => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/requests"); // API URL ঠিক করে নাও
+        const response = await axios.get("http://localhost:3000/requests");
         setRequests(response.data);
       } catch (error) {
         console.error("Error fetching requests:", error);

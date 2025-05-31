@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import { useNavigate } from "react-router-dom";
-import axios from "axios"; 
+import axios from "axios";
 
 const JoinAsEmployee = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const JoinAsEmployee = () => {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const isAffiliated = formData.email.endsWith(""); 
+    const isAffiliated = formData.email.endsWith(""); //akana  sumu@company.com email delao hoba
     if (isAffiliated) {
       const userData = {
         fullName: formData.fullName,
@@ -34,6 +34,7 @@ const JoinAsEmployee = () => {
       try {
         // Axios POST request to save employee data in database
         const response = await axios.post("http://localhost:3000/employee", userData);
+        console.log(response.data);
 
         if (response.data.insertedId) {
           localStorage.setItem("user", JSON.stringify(userData));
@@ -46,7 +47,7 @@ const JoinAsEmployee = () => {
             showConfirmButton: false,
           });
 
-          navigate("/");  
+          navigate("/");
         }
       } catch (error) {
         console.error("Error registering employee:", error);
@@ -76,7 +77,7 @@ const JoinAsEmployee = () => {
         icon: "success",
         showConfirmButton: true,
       });
-      navigate("/");  
+      navigate("/");
     } catch (error) {
       Swal.fire({
         title: `${providerName} Login Failed`,

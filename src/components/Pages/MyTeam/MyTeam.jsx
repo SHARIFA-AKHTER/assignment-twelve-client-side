@@ -1,11 +1,11 @@
 
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const MyTeam = () => {
   const [teamMembers, setTeamMembers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State for error handling
 
   useEffect(() => {
     // Fetch team members from backend
@@ -17,6 +17,7 @@ const MyTeam = () => {
       })
       .catch((error) => {
         console.error("Error fetching team members:", error);
+        setError("Failed to load team members.");
         setLoading(false); 
       });
   }, []);
@@ -25,17 +26,21 @@ const MyTeam = () => {
     return <p className="text-center text-xl font-semibold mt-10">Loading Team...</p>;
   }
 
+  if (error) {
+    return <p className="text-center text-xl font-semibold text-red-500 mt-10">{error}</p>;
+  }
+
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-4xl font-bold text-center mb-6">My Team</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {teamMembers.map((member) => (
+        {teamMembers.map((member, index) => (
           <div
-            key={member.id}
+            key={member.id || index} // Use member.id or index as a fallback
             className="bg-white p-4 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
           >
             <img
-              src={member.image}
+              src={member.image || "https://i.ibb.co.com/kdn78mk/multiple-member.jpg"} // Fallback image
               alt={member.name}
               className="w-32 h-32 object-cover rounded-full mx-auto mb-4"
             />
@@ -58,3 +63,4 @@ const MyTeam = () => {
 };
 
 export default MyTeam;
+
