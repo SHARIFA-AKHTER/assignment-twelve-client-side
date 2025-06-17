@@ -1,16 +1,18 @@
 import { Outlet } from "react-router-dom";
 import Navbar from "../../Navbar/Navbar";
 
-
 const HRDashboard = () => {
   return (
-    <div className="max-w-4xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
-      <Navbar></Navbar>
-      <h1 className="text-3xl font-bold text-center text-blue-600 mb-6">
-        HR Manager Dashboard
-      </h1>
-      <div className="border-t border-gray-300 pt-4">
-        <Outlet />
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      
+      <div className="p-4 mx-auto mt-6 bg-white border border-gray-200 rounded-lg shadow-lg max-w-7xl sm:p-6 lg:p-8">
+        <h1 className="mb-6 text-2xl font-bold text-center text-blue-600 sm:text-3xl">
+          HR Manager Dashboard
+        </h1>
+        <div className="pt-4 border-t border-gray-300">
+          <Outlet />
+        </div>
       </div>
     </div>
   );

@@ -17,11 +17,11 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (user && role === 'hr-manager') {
+    if (user && role === 'hr_manager') {
       const hasPaid = user.email === 'hr@gmail.com';
       setPaymentStatus(hasPaid);
     }
-    console.log("User Role:", user?.role);  
+    console.log("User Role:", userInfo?.role);
   }, [user, role]);
 
   const handleLogout = async () => {
@@ -38,66 +38,66 @@ const Navbar = () => {
     if (!user) {
       return (
         <>
-          <Link to="/" className="block px-4 py-2 lg:px-0 hover:bg-purple-500 rounded">🏠 Home</Link>
-          <Link to="/join-as-employee" className="block px-4 py-2 lg:px-0 hover:bg-purple-500 rounded">👤 Join as Employee</Link>
-          <Link to="/join-as-hr-manager" className="block px-4 py-2 lg:px-0 hover:bg-purple-500 rounded">📝 Join as HR Manager</Link>
-          <Link to={role === 'hr-manager' ? '/hr' : '/dashboard/employee'}>
-            <button className="btn flex items-center">
+          <Link to="/" className="block px-4 py-2 rounded lg:px-0 hover:bg-purple-500">🏠 Home</Link>
+          <Link to="/join-as-employee" className="block px-4 py-2 rounded lg:px-0 hover:bg-purple-500">👤 Join as Employee</Link>
+          <Link to="/join-as-hr-manager" className="block px-4 py-2 rounded lg:px-0 hover:bg-purple-500">📝 Join as HR Manager</Link>
+          <Link to={role === 'hr_manager' ? '/dashboard/hr' : '/dashboard/employee'}>
+            <button className="flex items-center btn">
               <MdDashboard className="mr-2" />
               <div className="badge badge-secondary">+0</div>
             </button>
           </Link>
-          <Link to="/login" className="block px-4 lg:px-0 bg-white text-purple-700 font-semibold py-1 rounded hover:bg-gray-200">🔑 Login</Link>
+          <Link to="/login" className="block px-4 py-1 font-semibold text-purple-700 bg-white rounded lg:px-0 hover:bg-gray-200">🔑 Login</Link>
         </>
       );
     }
-    else if (user && role === 'hr-manager' && paymentStatus) {
+    else if (user && role === 'hr_manager' && paymentStatus) {
       return (
         <>
-          <Link to="/dashboard/hr/asset-list" className="block px-4 py-2 hover:bg-purple-500 rounded">📋 Asset List</Link>
-          <Link to="/dashboard/hr/add-asset" className="block px-4 py-2 hover:bg-purple-500 rounded">➕ Add New Asset</Link>
-          <Link to="/dashboard/hr/all-requests" className="block px-4 py-2 hover:bg-purple-500 rounded">📜 All Requests</Link>
-          <Link to="/dashboard/hr/employee-list" className="block px-4 py-2 hover:bg-purple-500 rounded">👨‍💼 Employee List</Link>
-          <Link to="/dashboard/hr/add-employee" className="block px-4 py-2 hover:bg-purple-500 rounded">➕ Add an Employee</Link>
-          <Link to="/dashboard/hr/my-assets" className="block px-4 py-2 hover:bg-purple-500 rounded">➕My Assets Dashboard</Link>
-          <Link to="/dashboard/hr/profile" className="block px-4 py-2 hover:bg-purple-500 rounded">👤 Profile</Link>
+          <Link to="/dashboard/hr/asset-list" className="block px-4 py-2 rounded hover:bg-purple-500">📋 Asset List</Link>
+          <Link to="/dashboard/hr/add-asset" className="block px-4 py-2 rounded hover:bg-purple-500">➕ Add New Asset</Link>
+          <Link to="/dashboard/hr/all-requests" className="block px-4 py-2 rounded hover:bg-purple-500">📜 All Requests</Link>
+          <Link to="/dashboard/hr/employee-list" className="block px-4 py-2 rounded hover:bg-purple-500">👨‍💼 Employee List</Link>
+          <Link to="/dashboard/hr/add-employee" className="block px-4 py-2 rounded hover:bg-purple-500">➕ Add an Employee</Link>
+          <Link to="/dashboard/hr/my-assets" className="block px-4 py-2 rounded hover:bg-purple-500">➕My Assets Dashboard</Link>
+          <Link to="/dashboard/hr/profile" className="block px-4 py-2 rounded hover:bg-purple-500">👤 Profile</Link>
         </>
       );
     }
 
-    else if (user && role === 'hr-manager' && !paymentStatus) {
-      
+    else if (user && role === 'hr_manager' && !paymentStatus) {
+
       return (
-        <span className="text-red-500 font-semibold">
+        <span className="font-semibold text-red-500">
           💰 Please complete payment to access HR features
         </span>
-        
+
       );
-      
+
     }
 
     else {
       return (
         <>
-          <Link to="/dashboard/employee/assets" className="block px-4 py-2 hover:bg-purple-500 rounded">📦 My Assets</Link>
-          <Link to="/dashboard/employee/team" className="block px-4 py-2 hover:bg-purple-500 rounded">👥 My Team</Link>
-          <Link to="/dashboard/employee/request-asset" className="block px-4 py-2 hover:bg-purple-500 rounded">🔧 Request for Asset</Link>
-          <Link to="/dashboard/employee/profile" className="block px-4 py-2 hover:bg-purple-500 rounded">👤 Profile</Link>
+          <Link to="/dashboard/employee/assets" className="block px-4 py-2 rounded hover:bg-purple-500">📦 My Assets</Link>
+          <Link to="/dashboard/employee/team" className="block px-4 py-2 rounded hover:bg-purple-500">👥 My Team</Link>
+          <Link to="/dashboard/employee/request-asset" className="block px-4 py-2 rounded hover:bg-purple-500">🔧 Request for Asset</Link>
+          <Link to="/dashboard/employee/profile" className="block px-4 py-2 rounded hover:bg-purple-500">👤 Profile</Link>
         </>
       );
     }
   };
 
   const renderLogo = () => {
-    if (user && role === 'hr-manager' && company) {
+    if (user && role === 'hr_manager' && company) {
       return <img src={company} alt="Company Logo" className="h-8" />;
     }
     return <span className="text-xl font-bold text-blue-700">MangeMate</span>;
   };
 
   return (
-    <nav className="bg-white shadow p-4 relative">
-      <div className="flex justify-between items-center">
+    <nav className="relative p-4 bg-white shadow">
+      <div className="flex items-center justify-between">
 
         {/* Logo */}
         <div className="flex items-center space-x-2">
@@ -112,28 +112,28 @@ const Navbar = () => {
         </div>
 
         {/* Desktop Menu */}
-        <div className="hidden lg:flex items-center space-x-4">
+        <div className="items-center hidden space-x-4 lg:flex">
           {renderLinks()}
           {user && (
             <>
-              <Link to={role === 'hr-manager' ? '/hr' : '/dashboard/employee'}>
-                <button className="btn flex items-center">
+              <Link to={role === 'hr_manager' ? '/dashboard/hr' : '/dashboard/employee'}>
+                <button className="flex items-center btn">
                   <MdDashboard className="mr-2" />
                   <div className="badge badge-secondary">+0</div>
                 </button>
               </Link>
-              <span className="font-medium text-sm">{user.displayName}</span>
+              <span className="text-sm font-medium">{user.displayName}</span>
 
               <div className="flex items-center space-x-2">
                 <img
                   src={userInfo?.photo || "https://i.ibb.co/2kRjWbM/default-user.png"}
                   alt="Profile"
-                  className="h-8 w-8 rounded-full"
+                  className="w-8 h-8 rounded-full"
                 />
                 <span>{userInfo?.name || "User"}</span>
                 <button
                   onClick={handleLogout}
-                  className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-500 transition duration-200"
+                  className="px-3 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-500"
                 >
                   Logout
                 </button>
@@ -149,11 +149,11 @@ const Navbar = () => {
           {renderLinks()}
           {user && (
             <>
-            
-              <span className="font-medium text-sm">{user.displayName}</span>
+
+              <span className="text-sm font-medium">{user.displayName}</span>
               <button
                 onClick={handleLogout}
-                className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-500 transition duration-200"
+                className="px-3 py-1 text-white transition duration-200 bg-red-600 rounded hover:bg-red-500"
               >
                 Logout
               </button>
