@@ -88,7 +88,7 @@ const AddEmployee = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-6">
+    <div className="max-w-5xl px-4 py-6 mx-auto">
       <Helmet>
         <title>ManageMate | Add Employees</title>
       </Helmet>
@@ -96,13 +96,13 @@ const AddEmployee = () => {
       <ToastContainer position="top-center" />
 
       {/* Package Info */}
-      <section className="mb-8 p-6 border rounded-lg shadow">
-        <h2 className="text-xl font-bold mb-2">Package Information</h2>
+      <section className="p-6 mb-8 border rounded-lg shadow">
+        <h2 className="mb-2 text-xl font-bold">Package Information</h2>
         <p className="mb-1">🧑‍🤝‍🧑 Current Team Members: <strong>{teamCount}</strong></p>
         <p className="mb-3">📦 Member Limit: <strong>{limit}</strong></p>
         <button
           onClick={() => navigate("/packages")}
-          className="mt-2 px-5 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+          className="px-5 py-2 mt-2 text-white bg-green-600 rounded hover:bg-green-700"
         >
           Increase Limit
         </button>
@@ -110,7 +110,7 @@ const AddEmployee = () => {
 
       {/* Header with Select All */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-center w-full">Add Employees to Your Team</h2>
+        <h2 className="w-full text-2xl font-bold text-center">Add Employees to Your Team</h2>
         {employees.length > 0 && (
           <label className="flex items-center gap-2 text-sm">
             <input
@@ -128,7 +128,7 @@ const AddEmployee = () => {
       {employees.length === 0 ? (
         <p className="text-center text-gray-500">No unaffiliated employees found.</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {employees.map((emp) => (
             <div key={emp.id || emp._id || emp.email} className="flex items-center gap-4 p-4 border rounded-lg shadow-sm">
               <input
@@ -140,7 +140,7 @@ const AddEmployee = () => {
               <img
                 src={emp.image || "https://i.ibb.co.com/kdn78mk/multiple-member.jpg"}
                 alt={emp.name}
-                className="w-14 h-14 rounded-full object-cover"
+                className="object-cover rounded-full w-14 h-14"
               />
               <div className="flex-1">
                 <h4 className="font-semibold">{emp.name}</h4>
@@ -149,7 +149,7 @@ const AddEmployee = () => {
               <button
                 onClick={() => handleSingleAdd(emp.id)}
                 disabled={singleLoadingId === emp.id}
-                className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
+                className="px-3 py-1 text-white bg-blue-500 rounded hover:bg-blue-600 disabled:opacity-50"
               >
                 {singleLoadingId === emp.id ? "Adding..." : "Add"}
               </button>
@@ -163,7 +163,7 @@ const AddEmployee = () => {
         <button
           onClick={handleBulkAdd}
           disabled={loading}
-          className="mt-6 w-full sm:w-auto px-6 py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 block mx-auto disabled:opacity-60"
+          className="block w-full px-6 py-3 mx-auto mt-6 font-semibold text-white bg-blue-700 rounded-lg sm:w-auto hover:bg-blue-800 disabled:opacity-60"
         >
           {loading ? "Adding Selected..." : "Add Selected Employees"}
         </button>

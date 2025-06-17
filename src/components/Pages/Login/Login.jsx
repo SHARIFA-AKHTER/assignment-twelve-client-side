@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 const Login = () => {
-  const { signIn, googleSignIn, user, role, loading} = useContext(AuthContext);
+  const { signIn, googleSignIn, user, role, loading } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -19,63 +19,65 @@ const Login = () => {
     console.log(email, password);
 
     signIn(email, password)
-    .then((result) => {
-      // const user = (result.user.email);
-      console.log('sign in',result.user.email);
-      const user = {email:email}
-       // Save user data to localStorage
-       localStorage.setItem("user", JSON.stringify(user));
-       console.log("User data saved to localStorage:", user);
-      axios.post('http://localhost:3000/jwt', user,{withCredentials: true})
-      .then(res =>{
-        console.log(res.data)
-      })
-      navigate(from, { replace: true });
+      .then((result) => {
+        // const user = (result.user.email);
+        console.log('sign in', result.user.email);
+        const user = { email: email }
+        // Save user data to localStorage
+        localStorage.setItem("user", JSON.stringify(user));
+        console.log("User data saved to localStorage:", user);
+        axios.post('http://localhost:3000/jwt', user, { withCredentials: true })
+          .then(res => {
+            console.log(res.data)
+          })
 
-      Swal.fire({
-        title: "User Login Successful",
-        showClass: {
-          popup: `
+
+        navigate(from, { replace: true });
+
+        Swal.fire({
+          title: "User Login Successful",
+          showClass: {
+            popup: `
             animate__animated
             animate__fadeInUp
             animate__faster
           `,
-        },
-        hideClass: {
-          popup: `
+          },
+          hideClass: {
+            popup: `
             animate__animated
             animate__fadeOutDown
             animate__faster
           `,
-        },
+          },
+        });
+
       });
-      
-    });
   };
 
   const handleGoogleLogin = () => {
     googleSignIn()
-    .then((result) => {
-      const user = result.user;
-      console.log("Google user:", user);
+      .then((result) => {
+        const user = result.user;
+        console.log("Google user:", user);
 
         // Save user data to localStorage
         localStorage.setItem("user", JSON.stringify(user));
         console.log("Google user data saved to localStorage:", user);
-      Swal.fire({
-        title: "Google Login Successful",
-        text: `Welcome, ${user.displayName}!`,
-        icon: "success",
-        showClass: {
-          popup: `animate__animated animate__fadeInUp animate__faster`,
-        },
-        hideClass: {
-          popup: `animate__animated animate__fadeOutDown animate__faster`,
-        },
-      });
+        Swal.fire({
+          title: "Google Login Successful",
+          text: `Welcome, ${user.displayName}!`,
+          icon: "success",
+          showClass: {
+            popup: `animate__animated animate__fadeInUp animate__faster`,
+          },
+          hideClass: {
+            popup: `animate__animated animate__fadeOutDown animate__faster`,
+          },
+        });
 
-     
-    });
+
+      });
   };
 
   return (
@@ -83,12 +85,12 @@ const Login = () => {
       <Helmet>
         <title>ManageMate |Login</title>
       </Helmet>
-      <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+      <div className="min-h-screen hero bg-base-200">
+        <div className="flex-col hero-content lg:flex-row-reverse">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Login now!</h1>
           </div>
-          <div className="card bg-base-100 w-full max-w-sm shadow-2xl">
+          <div className="w-full max-w-sm shadow-2xl card bg-base-100">
             <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
@@ -119,7 +121,7 @@ const Login = () => {
                   </a>
                 </label>
               </div>
-              <div className="form-control mt-6">
+              <div className="mt-6 form-control">
                 <input
                   className="btn btn-primary"
                   type="submit"
@@ -127,16 +129,16 @@ const Login = () => {
                 />
               </div>
             </form>
-            <div className="text-center my-4">
+            <div className="my-4 text-center">
               <p>Or</p>
               <button
                 onClick={handleGoogleLogin}
-                className="btn btn-outline w-full"
+                className="w-full btn btn-outline"
               >
                 Continue with Google
               </button>
             </div>
-            <p className="text-sm ml-8">
+            <p className="ml-8 text-sm">
               <small>
                 New here?{" "}
                 <Link to="/signup" className="text-blue-500 hover:underline">

@@ -11,9 +11,9 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar Toggle Button for Mobile */}
-      
+
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-orange-500 text-white rounded"
+        className="fixed z-50 p-2 text-white bg-orange-500 rounded md:hidden top-4 left-4"
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         {sidebarOpen ? <MdClose size={24} /> : <MdMenu size={24} />}
@@ -21,16 +21,15 @@ const Dashboard = () => {
 
       {/* Sidebar */}
       <div
-        className={`fixed md:relative top-0 left-0 w-64 bg-orange-400 p-4 transition-transform duration-300 ${
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
-        } md:translate-x-0 md:block z-40`}
+        className={`fixed md:relative top-0 left-0 w-64 bg-orange-400 p-4 transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } md:translate-x-0 md:block z-40`}
       >
-        <h2 className="text-xl font-semibold mb-4">Employee Dashboard</h2>
+        <h2 className="mb-4 text-xl font-semibold">Employee Dashboard</h2>
         <ul className="space-y-4">
           <li>
             <NavLink
               to="/dashboard/employee/assets"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <FaClipboardList />
               My Assets
@@ -39,7 +38,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/employee/request-asset"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <FaClipboardList />
               My Requested Assets
@@ -48,7 +47,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/employee/team"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <FaClipboardList />
               My Team
@@ -57,7 +56,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/employee/profile"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <FaClipboardList />
               Profile
@@ -66,7 +65,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <FaHome />
               Home
@@ -74,13 +73,13 @@ const Dashboard = () => {
           </li>
         </ul>
 
-        <div className="divider my-6" />
-        <h2 className="text-xl font-semibold mb-4">HR Manager Dashboard</h2>
+        <div className="my-6 divider" />
+        <h2 className="mb-4 text-xl font-semibold">HR Manager Dashboard</h2>
         <ul className="space-y-4">
           <li>
             <NavLink
               to="/dashboard/hr/asset-list"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               Asset List
@@ -89,7 +88,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/add-asset"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               Add Asset
@@ -98,7 +97,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/my-assets"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               My assets Dashboard
@@ -107,7 +106,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/all-requests"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               All Requests
@@ -116,7 +115,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/employee-list"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               Employee List
@@ -125,7 +124,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/add-employee"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               Add Employee
@@ -134,7 +133,7 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/profile"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               HR Profile
@@ -143,12 +142,13 @@ const Dashboard = () => {
           <li>
             <NavLink
               to="/dashboard/hr/payment"
-              className="flex items-center gap-2 p-2 hover:bg-gray-700 rounded"
+              className="flex items-center gap-2 p-2 rounded hover:bg-gray-700"
             >
               <MdDashboard />
               HR Payment
             </NavLink>
           </li>
+          
         </ul>
       </div>
 

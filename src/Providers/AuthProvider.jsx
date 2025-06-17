@@ -90,7 +90,7 @@ const AuthProvider = ({ children }) => {
                     setCompany(res.data.company); 
                     setUserInfo(res.data);
                      // Set payment status based on the role or some condition
-                     if (res.data.role === 'hr-manager') {
+                     if (res.data.role === 'hr_manager') {
                         setPaymentStatus(res.data.paymentStatus || false); 
                     }
                     
